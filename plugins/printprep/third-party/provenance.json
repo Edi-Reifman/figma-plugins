@@ -1,0 +1,119 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "gs-core.js",
+      "digest": {
+        "sha256": "34855213c0cf34288c193868fea847de7fd419719d8f7343083d261bf82d94ba"
+      }
+    },
+    {
+      "name": "gs-core.js.gz",
+      "digest": {
+        "sha256": "13c33361a4867a3f7b23fab55810ee1fc6f6c7e59dd436fe5cdedbc2a5addd58"
+      }
+    },
+    {
+      "name": "gs-core.wasm",
+      "digest": {
+        "sha256": "13615a78029576ca8ebfebe1801a91441ee0485d944c89a8b16d409b649a214e"
+      }
+    },
+    {
+      "name": "gs-core.wasm.gz",
+      "digest": {
+        "sha256": "f3a12c0b4d2e891265a6ccea52f940bde60964cfdad45499cfe0e1dc00ff4b9e"
+      }
+    }
+  ],
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://github.com/ttomohisa/wasm-zoo/tree/b557dd168027b795bee72648c5596a751e059448/builders/ghostscript",
+      "externalParameters": {
+        "package": "ghostscript",
+        "upstreamVersion": "10.08.0",
+        "upstreamRef": "gs10.08.0",
+        "profile": "browser-full",
+        "builderVersion": "0.7.2",
+        "target": "browser",
+        "threads": false,
+        "simd": false
+      },
+      "internalParameters": {
+        "zooVersion": "0.13.0",
+        "metadataGenerator": "scripts/generate-build-metadata.mjs",
+        "browserSmokeTest": true
+      },
+      "resolvedDependencies": [
+        {
+          "uri": "https://github.com/emscripten-core/emscripten@6.0.7",
+          "digest": {
+            "sha1": "4483d70a78098ed5d860dff2dc21f3025b2da2ee"
+          },
+          "annotations": {
+            "ref": "6.0.7",
+            "gitCommit": "4483d70a78098ed5d860dff2dc21f3025b2da2ee"
+          }
+        },
+        {
+          "uri": "https://github.com/ArtifexSoftware/ghostpdl@gs10.08.0",
+          "digest": {
+            "sha1": "4d175558193ad50d6fbc329fe28dbb48af626126"
+          },
+          "annotations": {
+            "ref": "gs10.08.0",
+            "gitCommit": "4d175558193ad50d6fbc329fe28dbb48af626126"
+          }
+        },
+        {
+          "uri": "pkg:docker/emscripten/emsdk@6.0.7",
+          "digest": {
+            "sha256": "71190e58eab340c692c0c3bb9741705f5c9625766a561c906dc6c01b1ed6d761"
+          },
+          "annotations": {
+            "image": "docker.io/emscripten/emsdk:6.0.7",
+            "digestResolution": "resolved"
+          }
+        },
+        {
+          "uri": "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10080/ghostscript-10.08.0.tar.xz",
+          "digest": {
+            "sha256": "c20492bc8ebb96c87fa2e52a0926e1cda8cde95d66145e018ac713fed5da38cf"
+          }
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "id": "https://github.com/ttomohisa/wasm-zoo/actions"
+      },
+      "metadata": {
+        "invocationId": "https://github.com/ttomohisa/wasm-zoo/actions/runs/35448222893#attempt-1",
+        "finishedOn": "2026-09-19T14:21:31.437Z",
+        "completeness": {
+          "parameters": true,
+          "environment": true,
+          "materials": true
+        },
+        "reproducible": true
+      },
+      "byproducts": [
+        {
+          "name": "browser-smoke-test",
+          "content": {
+            "status": "passed",
+            "package": "ghostscript",
+            "profile": "browser-full"
+          }
+        },
+        {
+          "name": "manifest.json",
+          "content": {
+            "schemaVersion": 1
+          }
+        }
+      ]
+    }
+  }
+}

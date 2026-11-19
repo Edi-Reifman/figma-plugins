@@ -1,0 +1,24 @@
+WASM Zoo / Ghostscript
+======================
+Zoo build version: 0.7.2
+Profile: browser-full
+Profile label: Browser Full
+Binary license: AGPL-3.0-or-later
+
+Ghostscript version: 10.08.0
+Ghostscript source ref: gs10.08.0
+Ghostscript source commit: 4d175558193ad50d6fbc329fe28dbb48af626126
+Ghostscript release source SHA-256: c20492bc8ebb96c87fa2e52a0926e1cda8cde95d66145e018ac713fed5da38cf
+Ghostscript repository: https://github.com/ArtifexSoftware/ghostpdl.git
+
+Emscripten version: 6.0.7
+Emscripten commit: 4483d70a78098ed5d860dff2dc21f3025b2da2ee
+
+Browser target:
+- upstream gs command-line entry point
+- PostScript and PDF interpretation
+- BMP/JPEG/PNG/PS/TIFF output driver groups
+- single-threaded WebAssembly in an outer Worker
+- Emscripten MEMFS; no native filesystem/process integration
+- no CUPS, D-Bus, GTK, X11, fontconfig, libpaper, libidn, pdftoraster or IJS integration
+- GhostPCL/GhostXPS are not included in this Ghostscript package

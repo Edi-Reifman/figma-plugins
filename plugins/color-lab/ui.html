@@ -1,0 +1,288 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>
+:root{font:12px Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#e9e9ec;background:#18191c;color-scheme:dark;--muted:#9699a4;--line:#34363d;--accent:#b7f16b}*{box-sizing:border-box}body{margin:0;height:100vh;display:flex;flex-direction:column;overflow:hidden}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.4;cursor:default}button,select,input[type=number]{color:inherit;background:#282a30;border:1px solid var(--line);border-radius:6px}button{padding:7px 10px}button:hover{background:#35383e}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}header{height:67px;flex-shrink:0;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px}.brand{display:flex;align-items:center;gap:11px}.logo{width:30px;height:30px;border-radius:9px;background:conic-gradient(#b7f16b,#6bd5f1,#b694f7,#f17b6b,#b7f16b);padding:8px}.logo:after{content:'';display:block;background:#18191c;border-radius:50%;width:14px;height:14px}h1{font-size:17px;margin:0;letter-spacing:-.5px}.sub{color:var(--muted);font-size:10px;margin-top:3px;letter-spacing:.9px}.top-actions{display:flex;align-items:center;gap:3px}.top-actions button{font-size:10px;padding:6px 7px}.ghost{border-color:transparent;background:transparent;color:var(--muted)}main{display:grid;grid-template-columns:180px 1fr;flex:1;min-height:0}nav{padding:20px 10px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}.caption{font-size:9px;letter-spacing:1.5px;color:var(--muted);padding:0 10px 10px}.tab{border:0;background:transparent;text-align:left;padding:11px 9px;display:flex;align-items:center;gap:9px;color:#b3b5bd;border-radius:7px;font-size:11px}.tab.active{background:#30372a;color:#c7f398}.tab .index{font-size:9px;font-variant-numeric:tabular-nums;opacity:.55}.dot{margin-left:auto;width:5px;height:5px;border-radius:50%;background:var(--accent)}.nav-note{font-size:10px;line-height:1.6;color:#858996;margin:auto 9px 0;padding-top:18px}.right{display:flex;flex-direction:column;min-width:0;min-height:0}.preview-head{display:flex;justify-content:space-between;align-items:center;margin:15px 20px 9px;color:var(--muted);font-size:10px}.selection{max-width:310px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#c4c6cd}.preview{height:192px;flex-shrink:0;background:#111215;margin:0 20px;position:relative;display:flex;align-items:center;justify-content:center;border:1px solid #2c2e35;border-radius:8px;overflow:hidden}.preview canvas{max-width:100%;max-height:100%;object-fit:contain}.empty{color:#858996;text-align:center;line-height:1.7;padding:20px}.badge{position:absolute;left:9px;bottom:8px;font-size:9px;padding:4px 6px;border-radius:4px;background:#17191bd9;color:#b9bdc5}.preview-note{font-size:9px;color:#858996;margin:7px 20px 10px}.editor{flex:1;min-height:0;overflow:auto;padding:6px 20px 16px}.editor-head{display:flex;align-items:center;justify-content:space-between;margin:2px 0 15px}h2{font-size:17px;letter-spacing:-.4px;margin:0}.switchlabel{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:10px}input[type=checkbox]{accent-color:var(--accent)}.row{margin:12px 0}.row-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;font-size:11px;color:#c5c7ce}.row-head input{width:64px;padding:4px 5px;text-align:right;font-variant-numeric:tabular-nums}input[type=range]{width:100%;height:4px;accent-color:var(--accent);cursor:pointer;display:block;margin:11px 0}select{padding:7px 9px;max-width:180px}.inline{display:flex;align-items:center;gap:10px;margin:11px 0;flex-wrap:wrap}.inline label{color:#b9bdc5;font-size:11px}.hint{font-size:10px;line-height:1.6;color:var(--muted);margin:10px 0}.curves{display:block;width:100%;height:165px;border-radius:6px;background:#202227;touch-action:none;cursor:crosshair}input[type=color]{width:38px;height:28px;border:1px solid var(--line);border-radius:5px;background:transparent;padding:2px}.stage-reset{font-size:10px;padding:4px 7px}.disabled-fields{opacity:.45}footer{border-top:1px solid var(--line);padding:12px 20px 14px;flex-shrink:0}.footer-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.mode{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:10px}.mode select{width:190px;font-size:11px}.primary{background:var(--accent);color:#1c2810;border-color:var(--accent);font-weight:650;min-width:146px;padding:10px 16px}.primary:hover{background:#c9ff81}.status{min-height:15px;margin:9px 0 0;font-size:10px;color:var(--muted)}.status.error{color:#ff9b91}.status.success{color:var(--accent)}.compare{font-size:10px;padding:4px 9px}.compare.active{background:#b7f16b;color:#17220b}#presetfile{display:none}.divider{border-top:1px solid var(--line);margin:14px 0}.histogram{height:28px;width:100%;display:block;margin-bottom:8px}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#444751;border-radius:5px}
+dialog{width:610px;max-width:92vw;max-height:85vh;background:#202226;color:#e9e9ec;border:1px solid #43464e;border-radius:12px;padding:24px}dialog::backdrop{background:#000a}dialog h3{margin-top:24px;font-size:13px}dialog p,dialog li{font-size:12px;line-height:1.65;color:#c0c3cc}dialog .dialog-top{display:flex;justify-content:space-between;align-items:center}#cancel{display:none}body.busy #cancel{display:block}body.busy main,body.busy .top-actions{opacity:.65}.preview-tools{display:flex;gap:7px}.foot-buttons{display:flex;gap:7px}.nav-note button{margin-top:10px;font-size:10px}.curves:focus-visible{outline:2px solid var(--accent)}
+</style></head><body>
+<header><div class="brand"><div class="logo"></div><div><h1>Color Lab</h1><div class="sub">ALL YOUR ADJUSTMENTS.</div></div></div><div class="top-actions"><button class="ghost" id="lang" title="Change language">EN / RU</button><button class="ghost" id="help">Help</button><button class="ghost" id="load">Загрузить пресет</button><button class="ghost" id="save">Сохранить</button><button id="reset">Сбросить всё</button></div></header>
+<main><nav id="nav"><div class="caption">ADJUSTMENTS / 09</div><div class="nav-note" id="nav-note">Фото · вектор · текст<br>Все коррекции складываются сверху вниз.<br><button id="demo">Create demo</button></div></nav><div class="right"><div class="preview-head"><span id="selection" class="selection">Выделите слой в Figma</span><button class="compare" id="compare" title="Нажмите и удерживайте для просмотра исходника">Удерживать: до</button></div><div class="preview"><canvas id="preview" hidden></canvas><div class="empty" id="empty">Выделите фото, текст, фигуры<br>или целый фрейм в Figma.</div><span class="badge" id="badge" hidden>AFTER</span></div><div class="preview-note" id="preview-note">Превью первого объекта · в режиме слоёв смешивание и эффекты могут выглядеть иначе.</div><div class="editor" id="editor"></div></div></main>
+<footer><div class="footer-row"><div class="mode"><span id="result-label">Результат</span><select id="mode"><option value="layers">Редактируемые слои</option><option value="raster">Единое изображение</option></select></div><div class="foot-buttons"><button id="cancel">Cancel</button><button id="apply" class="primary" disabled>Создать копию →</button></div></div><div id="status" class="status" role="status" aria-live="polite">Исходники сохраняются. Копия появится справа.</div></footer><input id="presetfile" type="file" accept="application/json,.json">
+<dialog id="help-dialog"><div class="dialog-top"><h2>Color Lab · 1.0.0</h2><button id="close-help" aria-label="Close help">×</button></div><div id="help-content"></div></dialog>
+<script>
+/* Color Lab — dependency-free sRGB adjustment engine. Shared by preview and Figma. */
+var ColorLab = (() => {
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+  const defaults = () => ({
+    brightness:{on:true,brightness:0,contrast:0},
+    levels:{on:true,channel:'rgb',rgb:[0,1,255,0,255],r:[0,1,255,0,255],g:[0,1,255,0,255],b:[0,1,255,0,255]},
+    curves:{on:true,channel:'rgb',rgb:[[0,0],[255,255]],r:[[0,0],[255,255]],g:[[0,0],[255,255]],b:[[0,0],[255,255]]},
+    exposure:{on:true,exposure:0,offset:0,gamma:1},
+    vibrance:{on:true,vibrance:0,saturation:0},
+    hue:{on:true,range:'master',hue:0,saturation:0,lightness:0,colorize:false},
+    balance:{on:true,range:'midtones',shadows:[0,0,0],midtones:[0,0,0],highlights:[0,0,0],preserve:true},
+    bw:{on:false,reds:40,yellows:60,greens:40,cyans:60,blues:20,magentas:80,tint:false,color:'#d4a36a'},
+    filter:{on:false,preset:'warming',color:'#ec8a32',density:25,preserve:true}
+  });
+  const lum = c => .2126*c[0]+.7152*c[1]+.0722*c[2];
+  function hsl(c) {
+    const [r,g,b]=c, hi=Math.max(r,g,b), lo=Math.min(r,g,b), d=hi-lo, l=(hi+lo)/2;
+    let h=0,s=0;
+    if(d) {s=d/(1-Math.abs(2*l-1));h=hi===r?((g-b)/d)%6:hi===g?(b-r)/d+2:(r-g)/d+4;h=((h*60)%360+360)%360;}
+    return [h,s,l];
+  }
+  function rgb([h,s,l]) {
+    h=((h%360)+360)%360; s=clamp(s);l=clamp(l);
+    const c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2;
+    const v=h<60?[c,x,0]:h<120?[x,c,0]:h<180?[0,c,x]:h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];
+    return v.map(t=>t+m);
+  }
+  const hex = s => [1,3,5].map(i=>parseInt(s.slice(i,i+2),16)/255);
+  function restoreLum(c, target) {
+    const delta=target-lum(c); return c.map(v=>clamp(v+delta));
+  }
+  function curveLut(points) {
+    const p=points.map(v=>[clamp(v[0],0,255),clamp(v[1],0,255)]).sort((a,b)=>a[0]-b[0]).filter((v,i,a)=>!i||v[0]>a[i-1][0]);
+    if(p.length<2) return Array.from({length:256},(_,i)=>i/255);
+    const d=p.slice(1).map((v,i)=>(v[1]-p[i][1])/(v[0]-p[i][0]));
+    const m=p.map((v,i)=>i===0?d[0]:i===p.length-1?d[d.length-1]:d[i-1]*d[i]<=0?0:2/(1/d[i-1]+1/d[i]));
+    return Array.from({length:256},(_,x)=>{
+      if(x<=p[0][0])return p[0][1]/255;
+      if(x>=p[p.length-1][0])return p[p.length-1][1]/255;
+      let i=0;while(p[i+1][0]<x)i++;
+      const w=p[i+1][0]-p[i][0],t=(x-p[i][0])/w,t2=t*t,t3=t2*t;
+      return clamp(((2*t3-3*t2+1)*p[i][1]+(t3-2*t2+t)*w*m[i]+(-2*t3+3*t2)*p[i+1][1]+(t3-t2)*w*m[i+1])/255);
+    });
+  }
+  const lookup=(lut,v)=>{const x=clamp(v)*255,a=Math.floor(x),b=Math.min(255,a+1);return lut[a]+(lut[b]-lut[a])*(x-a);};
+  const level=(v,p)=>{const lo=clamp(p[0],0,254),hi=clamp(p[2],lo+1,255),g=clamp(p[1],.1,10);return (p[3]+Math.pow(clamp((v*255-lo)/(hi-lo)),1/g)*(p[4]-p[3]))/255;};
+  function isNeutral(s) {
+    const d=defaults();
+    const ignored={levels:["channel"],curves:["channel"],hue:["range"],balance:["range","preserve"]};
+    return Object.keys(d).every(k=>{
+      if(!s[k].on)return true;
+      if(k==="filter"&&s[k].density===0)return true;
+      const a=JSON.parse(JSON.stringify(s[k])),b=JSON.parse(JSON.stringify(d[k]));
+      for(const key of ["on",...(ignored[k]||[])]){delete a[key];delete b[key];}
+      if(k==="bw"||k==="filter")return false;
+      return JSON.stringify(a)===JSON.stringify(b);
+    });
+  }
+  function compile(s) {
+    const cs=['r','g','b'];
+    const lut=cs.map(k=>Array.from({length:256},(_,i)=>{
+      let v=i/255;
+      if(s.brightness.on){v+=s.brightness.brightness/100;const f=Math.pow(2,s.brightness.contrast/50);v=(v-.5)*f+.5;v=clamp(v);}
+      if(s.levels.on){v=level(v,s.levels.rgb);v=level(v,s.levels[k]);}
+      return clamp(v);
+    }));
+    const curves=s.curves.on?['rgb','r','g','b'].map(k=>curveLut(s.curves[k])):null;
+    const balanceActive=s.balance.on&&['shadows','midtones','highlights'].some(k=>s.balance[k].some(v=>v!==0));
+    const filterColor=hex(s.filter.color),tintColor=hex(s.bw.color);
+    const centers={reds:0,yellows:60,greens:120,cyans:180,blues:240,magentas:300};
+    return function(c) {
+      c=c.map((v,i)=>lookup(lut[i],v));
+      if(curves)c=c.map((v,i)=>lookup(curves[i+1],lookup(curves[0],v)));
+      if(s.exposure.on&&(s.exposure.exposure||s.exposure.offset||s.exposure.gamma!==1)){
+        c=c.map(v=>{let l=v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4);l=clamp(l*Math.pow(2,s.exposure.exposure)+s.exposure.offset);v=l<=.0031308?12.92*l:1.055*Math.pow(l,1/2.4)-.055;return Math.pow(clamp(v),1/Math.max(.1,s.exposure.gamma));});
+      }
+      if(s.vibrance.on&&(s.vibrance.vibrance||s.vibrance.saturation)){
+        let h=hsl(c);h[1]=clamp(h[1]*(1+s.vibrance.saturation/100+s.vibrance.vibrance/100*(1-h[1])));c=rgb(h);
+      }
+      if(s.hue.on&&(s.hue.hue||s.hue.saturation||s.hue.lightness||s.hue.colorize)){
+        let h=hsl(c),weight=1;
+        if(s.hue.range!=='master'){const dist=Math.abs(((h[0]-centers[s.hue.range]+540)%360)-180);weight=clamp((60-dist)/30);}
+        if(s.hue.colorize){h[0]=s.hue.hue;h[1]=clamp((s.hue.saturation+100)/200);}
+        else{h[0]+=s.hue.hue*weight;h[1]=clamp(h[1]*(1+s.hue.saturation/100*weight));}
+        h[2]=clamp(h[2]+s.hue.lightness/100*weight);c=rgb(h);
+      }
+      if(balanceActive){
+        const l=lum(c),sh=Math.pow(1-l,2),hi=l*l,mid=2*l*(1-l),before=l;
+        c=c.map((v,i)=>clamp(v+(s.balance.shadows[i]*sh+s.balance.midtones[i]*mid+s.balance.highlights[i]*hi)/100));
+        if(s.balance.preserve)c=restoreLum(c,before);
+      }
+      if(s.bw.on){
+        const h=hsl(c),a=Math.floor(h[0]/60)%6,t=h[0]/60-a,keys=Object.keys(centers);
+        const mix=(s.bw[keys[a]]*(1-t)+s.bw[keys[(a+1)%6]]*t)/100;
+        const lo=Math.min(...c),hi=Math.max(...c);const gray=clamp(lo+(hi-lo)*mix);c=[gray,gray,gray];
+        if(s.bw.tint)c=restoreLum(tintColor,gray);
+      }
+      if(s.filter.on&&s.filter.density){const l=lum(c),a=s.filter.density/100;c=c.map((v,i)=>v*(1-a)+filterColor[i]*a);if(s.filter.preserve)c=restoreLum(c,l);}
+      return c.map(v=>clamp(v));
+    };
+  }
+  function pixels(data, transform, start=0, end=data.length) {
+    for(let i=start;i<end;i+=4){if(!data[i+3])continue;const c=transform([data[i]/255,data[i+1]/255,data[i+2]/255]);data[i]=Math.round(c[0]*255);data[i+1]=Math.round(c[1]*255);data[i+2]=Math.round(c[2]*255);}
+    return data;
+  }
+  return {defaults,isNeutral,compile,pixels,curveLut,hsl,rgb};
+})();
+if(typeof module!=='undefined')module.exports=ColorLab;
+
+let locale='en';
+const translations={"Яркость и контраст": "Brightness and contrast", "Уровни": "Levels", "Кривые": "Curves", "Экспозиция": "Exposure", "Сочность": "Vibrance", "Цветовой тон и насыщенность": "Hue and saturation", "Цветовой баланс": "Color balance", "Чёрно-белое": "Black & White", "Фотофильтр": "Photo Filter", "Включено": "Enabled", "Сбросить эту коррекцию": "Reset this adjustment", "Канал": "Channel", "Редактор кривой. Добавьте и переместите точки мышью.": "Curve editor. Click to add points and drag to edit.", "Клик — добавить точку. Перетащите для изменения. Двойной клик — удалить внутреннюю точку.": "Click to add a point. Drag to edit. Double-click to delete an interior point.", "Диапазон": "Range", "Colorize — тонирование": "Colorize", "Тональный диапазон": "Tonal range", "Сохранять яркость": "Preserve luminosity", "Тонировать": "Tint", "Цвет тонирования": "Tint color", "Фильтр": "Filter", "Цвет фильтра": "Filter color", "Не удалось открыть изображение.": "Could not decode this image.", "Изображение больше 4096 px. Уменьшите его или выберите режим «Единое изображение».": "Image exceeds 4096 px. Resize it or use Single image mode.", "Не удалось сохранить PNG.": "Could not encode PNG.", " · ещё ": " · plus ", "Выделите слой в Figma": "Select a layer in Figma", "Готовим предпросмотр…": "Preparing preview…", "Выделите фото, текст, фигуры или целый фрейм в Figma.": "Select an image, text, shapes, or an entire frame in Figma.", "Создать копию →": "Create copy →", "Обработка…": "Processing…", "Создаём копию и применяем коррекции…": "Creating a copy and applying adjustments…", "Все коррекции сброшены.": "All adjustments reset.", "Это не пресет Color Lab v1.": "Not a Color Lab v1 preset.", "Некорректная кривая.": "Invalid curve.", "Некорректные точки кривой.": "Invalid curve points.", "Пресет сохранён в JSON.": "Preset exported as JSON.", "Файл пресета слишком большой.": "Preset file is too large.", "Пресет загружен.": "Preset loaded.", "Фрейм станет PNG: общий эффект, размер до 4096 px. Исходник сохранится.": "Single PNG: adjusts the composite, up to 4096 px. Original preserved.", "Фото, заливки, градиенты, текст и тени обрабатываются отдельно. Исходник сохранится.": "Adjusts image fills, colors, gradients, text, and shadows separately. Original preserved.", "Предпросмотр недоступен": "Preview unavailable", "Выделите слои или фрейм в Figma.": "Select layers or a frame in Figma.", "Обработка отменена. Копии удалены, исходники сохранены.": "Cancelled. Generated copies removed; originals preserved.", "Не удалось создать результат. Исходники сохранены. Попробуйте другой режим или меньшее выделение.": "Could not create the result. Originals preserved. Try another mode or a smaller selection.", "Не удалось создать демо. Выделите собственный фрейм.": "Could not create the demo. Select your own frame instead.", "Справка": "Help", "Отменить": "Cancel", "Создать демо": "Create demo", "Загрузить пресет": "Load preset", "Сохранить": "Save preset", "Сбросить всё": "Reset all", "Удерживать: до": "Hold: before", "Результат": "Output", "Редактируемые слои": "Editable layers", "Единое изображение": "Single image", "Исходники сохраняются. Копия появится справа.": "Originals preserved. Your copy appears to the right.", "Превью первого объекта · в режиме слоёв смешивание и эффекты могут выглядеть иначе.": "First object preview · blending and effects may differ in Editable layers mode.", "Нажмите и удерживайте для просмотра исходника": "Press and hold to view the original", "Создаём демо…": "Creating demo…", "Демо создано. Измените настройки и создайте копию.": "Demo created. Adjust the settings and create a copy.", "Фото · вектор · текст": "Images · vectors · text", "Все коррекции складываются сверху вниз.": "Adjustments stack from top to bottom."};
+function t(text){
+ if(locale==='ru')return text;
+ if(translations[text])return translations[text];
+ return String(text).replace(/^Готово: (\d+) (?:копия|копии)\./,(_,n)=>`Done: ${n} ${n==='1'?'copy':'copies'}.`).replace(/ Пропущено свойств: (\d+)\./,(_,n)=>` Skipped properties: ${n}.`).replace(/^Слои: /,'Layers: ').replace(/^Изображение: /,'Image: ').replace(/^Предпросмотр недоступен: .*/, 'Preview unavailable for this selection.');
+}
+
+const $=id=>document.getElementById(id),clone=v=>JSON.parse(JSON.stringify(v));
+const stages=[['brightness','Brightness/Contrast',t('Яркость и контраст')],['levels','Levels',t('Уровни')],['curves','Curves',t('Кривые')],['exposure','Exposure',t('Экспозиция')],['vibrance','Vibrance',t('Сочность')],['hue','Hue/Saturation',t('Цветовой тон и насыщенность')],['balance','Color Balance',t('Цветовой баланс')],['bw','Black & White',t('Чёрно-белое')],['filter','Photo Filter',t('Фотофильтр')]];
+let settings=ColorLab.defaults(),active='hue',source=null,selectionCount=0,working=false,comparing=false,previewToken=0;
+const post=m=>parent.postMessage({pluginMessage:m},'*');
+function status(s,type=''){ $('status').textContent=t(s);$('status').className='status '+type; }
+function changed(){drawTabs();schedulePreview();}
+function drawTabs(){
+  document.querySelectorAll('.tab').forEach(n=>n.remove());
+  stages.forEach(([key,title,ru],i)=>{
+    const b=document.createElement('button');b.className='tab'+(active===key?' active':'');b.title=ru;b.setAttribute('aria-pressed',String(active===key));b.innerHTML=`<span class="index">0${i+1}</span><span>${title}</span>`;
+    const original=ColorLab.defaults()[key],current=clone(settings[key]);delete current.channel;delete current.range;const def=clone(original);delete def.channel;delete def.range;
+    if(JSON.stringify(current)!==JSON.stringify(def)&&settings[key].on){const d=document.createElement('span');d.className='dot';b.append(d);}
+    b.onclick=()=>{active=key;drawTabs();drawEditor();};$('nav').insertBefore(b,$('nav').lastElementChild);
+  });
+}
+function control(container,label,min,max,step,get,set){
+  const row=document.createElement('div');row.className='row';const top=document.createElement('div');top.className='row-head';
+  const text=document.createElement('label');text.textContent=label;const num=document.createElement('input');num.type='number';num.min=min;num.max=max;num.step=step;num.value=get();num.setAttribute('aria-label',label);
+  const range=document.createElement('input');range.type='range';range.min=min;range.max=max;range.step=step;range.value=get();range.setAttribute('aria-label',label);
+  const update=v=>{v=Number(v);if(!Number.isFinite(v))return;v=Math.max(min,Math.min(max,v));set(v);num.value=get();range.value=get();changed();};
+  range.oninput=()=>update(range.value);num.onchange=()=>update(num.value);top.append(text,num);row.append(top,range);container.append(row);
+}
+function select(container,label,values,value,change){const row=document.createElement('div');row.className='inline';const l=document.createElement('label');l.textContent=label;const s=document.createElement('select');s.setAttribute('aria-label',label);for(const [v,t]of values){const o=new Option(t,v);s.add(o);}s.value=value;s.onchange=()=>change(s.value);row.append(l,s);container.append(row);return s;}
+function check(container,label,value,change){const row=document.createElement('label');row.className='inline';const c=document.createElement('input');c.type='checkbox';c.checked=value;c.onchange=()=>{change(c.checked);changed();};row.append(c,document.createTextNode(label));container.append(row);}
+function colorControl(container,label,value,change){const row=document.createElement('div');row.className='inline';const l=document.createElement('label');l.textContent=label;const c=document.createElement('input');c.type='color';c.value=value;c.setAttribute('aria-label',label);c.oninput=()=>{change(c.value);changed();};row.append(l,c);container.append(row);}
+function hint(container,text){const p=document.createElement('p');p.className='hint';p.textContent=text;container.append(p);}
+const channels=[['rgb','RGB'],['r','Red'],['g','Green'],['b','Blue']];
+const ranges=[['master','Master'],['reds','Reds'],['yellows','Yellows'],['greens','Greens'],['cyans','Cyans'],['blues','Blues'],['magentas','Magentas']];
+function drawEditor(){
+  const e=$('editor'),s=settings[active];e.replaceChildren();const h=document.createElement('div');h.className='editor-head';const title=document.createElement('h2');title.textContent=stages.find(v=>v[0]===active)[1];
+  const actions=document.createElement('div');actions.className='inline';const toggle=document.createElement('label');toggle.className='switchlabel';const cb=document.createElement('input');cb.type='checkbox';cb.checked=s.on;cb.onchange=()=>{s.on=cb.checked;changed();drawEditor();};toggle.append(cb,document.createTextNode(t('Включено')));const reset=document.createElement('button');reset.className='stage-reset';reset.textContent='↺';reset.title=t('Сбросить эту коррекцию');reset.onclick=()=>{settings[active]=ColorLab.defaults()[active];drawEditor();changed();};actions.append(toggle,reset);h.append(title,actions);e.append(h);
+  const fields=document.createElement('div');if(!s.on)fields.className='disabled-fields';e.append(fields);
+  const slider=(label,key,min,max,step=1)=>control(fields,label,min,max,step,()=>s[key],v=>{s[key]=v;});
+  if(active==='brightness'){slider('Brightness', 'brightness',-100,100);slider('Contrast','contrast',-100,100);}
+  if(active==='levels'){
+    const histogram=document.createElement('canvas');histogram.className='histogram';histogram.width=480;histogram.height=28;fields.append(histogram);drawHistogram(histogram);
+    select(fields,t('Канал'),channels,s.channel,v=>{s.channel=v;drawEditor();});
+    const labels=['Input black','Gamma','Input white','Output black','Output white'];
+    labels.forEach((name,i)=>control(fields,name,i===1?.1:0,i===1?10:255,i===1?.01:1,()=>s[s.channel][i],v=>{const p=s[s.channel];if(i===0)v=Math.min(v,p[2]-1);if(i===2)v=Math.max(v,p[0]+1);p[i]=v;}));
+  }
+  if(active==='curves'){
+    select(fields,t('Канал'),channels,s.channel,v=>{s.channel=v;drawEditor();});
+    const c=document.createElement('canvas');c.className='curves';c.width=960;c.height=330;c.setAttribute('aria-label',t('Редактор кривой. Добавьте и переместите точки мышью.'));c.tabIndex=0;fields.append(c);curveEditor(c,s);hint(fields,t('Клик — добавить точку. Перетащите для изменения. Двойной клик — удалить внутреннюю точку.'));
+  }
+  if(active==='exposure'){slider('Exposure · EV','exposure',-5,5,.01);slider('Offset · linear','offset',-.5,.5,.001);slider('Gamma correction','gamma',.1,5,.01);}
+  if(active==='vibrance'){slider('Vibrance','vibrance',-100,100);slider('Saturation','saturation',-100,100);}
+  if(active==='hue'){
+    select(fields,t('Диапазон'),ranges,s.range,v=>{s.range=v;changed();});slider('Hue · °','hue',-180,180);slider('Saturation','saturation',-100,100);slider('Lightness','lightness',-100,100);check(fields,t('Colorize — тонирование'),s.colorize,v=>s.colorize=v);
+  }
+  if(active==='balance'){
+    select(fields,t('Тональный диапазон'),[['shadows','Shadows'],['midtones','Midtones'],['highlights','Highlights']],s.range,v=>{s.range=v;drawEditor();});
+    ['Cyan ↔ Red','Magenta ↔ Green','Yellow ↔ Blue'].forEach((name,i)=>control(fields,name,-100,100,1,()=>s[s.range][i],v=>s[s.range][i]=v));check(fields,t('Сохранять яркость'),s.preserve,v=>s.preserve=v);
+  }
+  if(active==='bw'){
+    for(const key of ['reds','yellows','greens','cyans','blues','magentas'])slider(key[0].toUpperCase()+key.slice(1),key,-100,200);
+    check(fields,t('Тонировать'),s.tint,v=>s.tint=v);colorControl(fields,t('Цвет тонирования'),s.color,v=>s.color=v);
+  }
+  if(active==='filter'){
+    const presets={warming:'#ec8a32',cooling:'#4285e8',sepia:'#a47742',red:'#f04343',green:'#57b85d',blue:'#5471ed',custom:s.color};
+    select(fields,t('Фильтр'),[['warming','Warming'],['cooling','Cooling'],['sepia','Sepia'],['red','Red'],['green','Green'],['blue','Blue'],['custom','Custom']],s.preset,v=>{s.preset=v;s.color=presets[v];changed();drawEditor();});
+    colorControl(fields,t('Цвет фильтра'),s.color,v=>{s.color=v;s.preset='custom';const sel=fields.querySelector('select');sel.value='custom';});slider('Density · %','density',0,100);check(fields,t('Сохранять яркость'),s.preserve,v=>s.preserve=v);
+  }
+}
+function curveEditor(canvas,s){
+  const ctx=canvas.getContext('2d'),pad=16,w=canvas.width-2*pad,h=canvas.height-2*pad;let drag=null;
+  const pts=()=>s[s.channel];
+  const xy=p=>[pad+p[0]/255*w,pad+(1-p[1]/255)*h];
+  function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.strokeStyle='#383b44';ctx.lineWidth=1;for(let i=0;i<=4;i++){ctx.beginPath();ctx.moveTo(pad+w*i/4,pad);ctx.lineTo(pad+w*i/4,pad+h);ctx.moveTo(pad,pad+h*i/4);ctx.lineTo(pad+w,pad+h*i/4);ctx.stroke();}ctx.strokeStyle='#50535d';ctx.beginPath();ctx.moveTo(pad,pad+h);ctx.lineTo(pad+w,pad);ctx.stroke();const lut=ColorLab.curveLut(pts());ctx.strokeStyle={rgb:'#b7f16b',r:'#ff8080',g:'#7be09a',b:'#80aaff'}[s.channel];ctx.lineWidth=3;ctx.beginPath();lut.forEach((v,i)=>{const p=xy([i,v*255]);i?ctx.lineTo(...p):ctx.moveTo(...p);});ctx.stroke();pts().forEach(p=>{ctx.beginPath();ctx.arc(...xy(p),6,0,Math.PI*2);ctx.fillStyle='#191b20';ctx.fill();ctx.stroke();});}
+  function point(ev){const r=canvas.getBoundingClientRect();return [Math.round(Math.max(0,Math.min(255,((ev.clientX-r.left)*canvas.width/r.width-pad)/w*255))),Math.round(Math.max(0,Math.min(255,(1-((ev.clientY-r.top)*canvas.height/r.height-pad)/h)*255)))];}
+  function near(p){let best=null,dist=14;pts().forEach(q=>{const d=Math.hypot(q[0]-p[0],q[1]-p[1]);if(d<dist){dist=d;best=q;}});return best;}
+  canvas.onpointerdown=ev=>{const p=point(ev);drag=near(p);if(!drag){if(p[0]===0||p[0]===255||pts().length>=16)return;drag=p;pts().push(p);pts().sort((a,b)=>a[0]-b[0]);}canvas.setPointerCapture(ev.pointerId);draw();changed();};
+  canvas.onpointermove=ev=>{if(!drag)return;const p=point(ev),i=pts().indexOf(drag);drag[0]=i===0?0:i===pts().length-1?255:Math.max(pts()[i-1][0]+1,Math.min(pts()[i+1][0]-1,p[0]));drag[1]=p[1];draw();changed();};
+  canvas.onpointerup=canvas.onpointercancel=()=>drag=null;
+  canvas.ondblclick=ev=>{const p=near(point(ev)),i=pts().indexOf(p);if(i>0&&i<pts().length-1){pts().splice(i,1);draw();changed();}};draw();
+}
+function drawHistogram(canvas){if(!source)return;const hist=new Uint32Array(64);for(let i=0;i<source.data.length;i+=16){if(!source.data[i+3])continue;const y=.2126*source.data[i]+.7152*source.data[i+1]+.0722*source.data[i+2];hist[Math.min(63,Math.floor(y/4))]++;}const max=Math.max(1,...hist),c=canvas.getContext('2d');c.fillStyle='#656d59';hist.forEach((n,i)=>c.fillRect(i*canvas.width/64,canvas.height*(1-n/max),canvas.width/64-1,canvas.height*n/max));}
+function schedulePreview(){const token=++previewToken;requestAnimationFrame(()=>{if(token===previewToken)renderPreview();});}
+function renderPreview(){if(!source)return;const canvas=$('preview');canvas.width=source.width;canvas.height=source.height;const data=new ImageData(new Uint8ClampedArray(source.data),source.width,source.height);if(!comparing)ColorLab.pixels(data.data,ColorLab.compile(settings));canvas.getContext('2d').putImageData(data,0,0);$('badge').textContent=comparing?'BEFORE':'AFTER';}
+async function decode(bytes){const blob=new Blob([new Uint8Array(bytes)]),url=URL.createObjectURL(blob);try{return await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error(t('Не удалось открыть изображение.')));img.src=url;});}finally{URL.revokeObjectURL(url);}}
+async function processImage(m){try{const img=await decode(m.bytes);if(img.width>4096||img.height>4096)throw new Error(t('Изображение больше 4096 px. Уменьшите его или выберите режим «Единое изображение».'));const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0);const data=ctx.getImageData(0,0,c.width,c.height),fn=ColorLab.compile(m.settings);for(let i=0;i<data.data.length;i+=262144){ColorLab.pixels(data.data,fn,i,Math.min(i+262144,data.data.length));await new Promise(r=>setTimeout(r,0));if(imageCancelled)throw new Error('Cancelled');}ctx.putImageData(data,0,0);const blob=await new Promise(r=>c.toBlob(r,'image/png'));if(!blob)throw new Error(t('Не удалось сохранить PNG.'));post({type:'image-result',id:m.id,bytes:new Uint8Array(await blob.arrayBuffer())});}catch(e){post({type:'image-error',id:m.id,message:e.message});}}
+let selectionEpoch=0,imageCancelled=false;
+function setWorking(value){working=value;document.body.classList.toggle('busy',value);document.querySelector('main').inert=value;document.querySelector('.top-actions').inert=value;$('mode').disabled=value;$('apply').disabled=value||!selectionCount;}
+window.onmessage=async ev=>{
+  const m=ev.data.pluginMessage;if(!m)return;
+  if(m.type==='selection'){selectionEpoch++;selectionCount=m.count;$('selection').textContent=m.count?`${m.name}${m.count>1?t(' · ещё ')+(m.count-1):''}`:t('Выделите слой в Figma');$('apply').disabled=working||!m.count;source=null;$('preview').hidden=true;$('badge').hidden=true;$('empty').hidden=false;$('empty').textContent=m.count?t('Готовим предпросмотр…'):t('Выделите фото, текст, фигуры или целый фрейм в Figma.');}
+  if(m.type==='preview'){const epoch=selectionEpoch;try{const img=await decode(m.bytes);if(epoch!==selectionEpoch)return;const c=document.createElement('canvas'),scale=Math.min(1,800/img.width,400/img.height);c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,c.width,c.height);source=ctx.getImageData(0,0,c.width,c.height);$('preview').hidden=false;$('badge').hidden=false;$('empty').hidden=true;schedulePreview();if(active==='levels')drawEditor();}catch(e){$('empty').textContent=e.message;}}
+  if(m.type==='preview-error')$('empty').textContent=m.message;
+  if(m.type==='process-image')processImage(m);
+  if(m.type==='demo-ready'){setWorking(false);$('apply').textContent=t('Создать копию →');status('Демо создано. Измените настройки и создайте копию.','success');}
+  if(m.type==='progress')status(m.message);
+  if(m.type==='done'||m.type==='error'){setWorking(false);$('apply').textContent=t('Создать копию →');$('apply').disabled=!selectionCount;$('mode').disabled=false;status(m.message,m.type==='error'||m.skipped?'error':'success');}
+};
+$('apply').onclick=()=>{if(working||!selectionCount)return;imageCancelled=false;setWorking(true);$('apply').textContent=t('Обработка…');status(t('Создаём копию и применяем коррекции…'));post({type:'apply',settings:clone(settings),mode:$('mode').value});};
+$('reset').onclick=()=>{settings=ColorLab.defaults();drawEditor();changed();status(t('Все коррекции сброшены.'));};
+function compare(on){comparing=on;$('compare').classList.toggle('active',on);schedulePreview();}
+$('compare').onpointerdown=e=>{compare(true);$('compare').setPointerCapture(e.pointerId);};$('compare').onpointerup=$('compare').onpointercancel=()=>compare(false);$('compare').onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();compare(true);}};$('compare').onkeyup=()=>compare(false);$('compare').onblur=()=>compare(false);
+function validatePreset(input){
+  if(!input||input.format!=='color-lab'||input.version!==1)throw new Error(t('Это не пресет Color Lab v1.'));
+  const def=ColorLab.defaults(),data=input.settings;
+  function merge(d,s){if(Array.isArray(d)){if(!Array.isArray(s))return d;if(Array.isArray(d[0])){if(s.length<2||s.length>16||s.some(p=>!Array.isArray(p)||p.length!==2||p.some(x=>!Number.isFinite(x)||x<0||x>255)))throw new Error(t('Некорректная кривая.'));const pts=clone(s).sort((a,b)=>a[0]-b[0]);if(pts[0][0]!==0||pts.at(-1)[0]!==255||pts.some((p,i)=>i&&p[0]<=pts[i-1][0]))throw new Error(t('Некорректные точки кривой.'));return pts;}return d.map((v,i)=>merge(v,s[i]));}if(d&&typeof d==='object'){const out={};for(const k of Object.keys(d))out[k]=merge(d[k],s?.[k]);return out;}if(typeof d==='number')return typeof s==='number'&&Number.isFinite(s)?Math.max(-1000,Math.min(1000,s)):d;if(typeof d==='boolean')return typeof s==='boolean'?s:d;if(typeof d==='string')return typeof s==='string'&&s.length<40?s:d;return d;}
+  const out=merge(def,data);
+  for(const k of ['r','g','b','rgb']){const p=out.levels[k];p[0]=Math.max(0,Math.min(254,p[0]));p[2]=Math.max(p[0]+1,Math.min(255,p[2]));p[1]=Math.max(.1,Math.min(10,p[1]));p[3]=Math.max(0,Math.min(255,p[3]));p[4]=Math.max(0,Math.min(255,p[4]));}
+  if(!ranges.some(v=>v[0]===out.hue.range))out.hue.range='master';
+  if(!channels.some(v=>v[0]===out.levels.channel))out.levels.channel='rgb';if(!channels.some(v=>v[0]===out.curves.channel))out.curves.channel='rgb';
+  if(!['shadows','midtones','highlights'].includes(out.balance.range))out.balance.range='midtones';
+  for(const k of ['bw','filter'])if(!/^#[0-9a-f]{6}$/i.test(out[k].color))out[k].color=def[k].color;
+  out.exposure.gamma=Math.max(.1,out.exposure.gamma);out.filter.density=Math.max(0,Math.min(100,out.filter.density));
+  const limits={brightness:{brightness:[-100,100],contrast:[-100,100]},exposure:{exposure:[-5,5],offset:[-.5,.5],gamma:[.1,5]},vibrance:{vibrance:[-100,100],saturation:[-100,100]},hue:{hue:[-180,180],saturation:[-100,100],lightness:[-100,100]},bw:{reds:[-100,200],yellows:[-100,200],greens:[-100,200],cyans:[-100,200],blues:[-100,200],magentas:[-100,200]}};
+  for(const [stage,fields] of Object.entries(limits))for(const [key,[min,max]]of Object.entries(fields))out[stage][key]=Math.max(min,Math.min(max,out[stage][key]));
+  for(const key of ['shadows','midtones','highlights'])out.balance[key]=out.balance[key].map(v=>Math.max(-100,Math.min(100,v)));
+  if(!['warming','cooling','sepia','red','green','blue','custom'].includes(out.filter.preset))out.filter.preset='custom';
+  return out;
+}
+$('save').onclick=()=>{const blob=new Blob([JSON.stringify({format:'color-lab',version:1,settings},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='color-lab-preset.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status(t('Пресет сохранён в JSON.'));};
+$('load').onclick=()=>$('presetfile').click();$('presetfile').onchange=async()=>{try{const f=$('presetfile').files[0];if(!f)return;if(f.size>100000)throw new Error(t('Файл пресета слишком большой.'));settings=validatePreset(JSON.parse(await f.text()));drawEditor();changed();status(t('Пресет загружен.'));}catch(e){status(e.message,'error');}finally{$('presetfile').value='';}};
+$('mode').onchange=()=>status($('mode').value==='raster'?t('Фрейм станет PNG: общий эффект, размер до 4096 px. Исходник сохранится.'):t('Фото, заливки, градиенты, текст и тени обрабатываются отдельно. Исходник сохранится.'));
+
+function setLocale(value){
+ locale=value;document.documentElement.lang=value;$('lang').textContent=value==='en'?'EN / RU':'RU / EN';
+ const strings={load:'Загрузить пресет',save:'Сохранить',reset:'Сбросить всё',compare:'Удерживать: до','result-label':'Результат',cancel:'Отменить',help:'Справка',apply:working?'Обработка…':'Создать копию →'};
+ for(const [id,text]of Object.entries(strings))$(id).textContent=t(text);
+ $('compare').title=t('Нажмите и удерживайте для просмотра исходника');
+ $('mode').options[0].textContent=t('Редактируемые слои');$('mode').options[1].textContent=t('Единое изображение');
+ $('preview-note').textContent=t('Превью первого объекта · в режиме слоёв смешивание и эффекты могут выглядеть иначе.');
+ $('nav-note').replaceChildren(document.createTextNode(t('Фото · вектор · текст')),document.createElement('br'),document.createTextNode(t('Все коррекции складываются сверху вниз.')),document.createElement('br'),$('demo'));
+ $('demo').textContent=t('Создать демо');
+ if(!source)$('empty').textContent=t('Выделите фото, текст, фигуры или целый фрейм в Figma.');
+ if(!selectionCount)$('selection').textContent=t('Выделите слой в Figma');
+ drawTabs();drawEditor();renderHelp();status('Исходники сохраняются. Копия появится справа.');
+}
+$('lang').onclick=()=>setLocale(locale==='en'?'ru':'en');
+$('cancel').onclick=()=>{imageCancelled=true;post({type:'cancel'});status('Обработка отменена. Копии удалены, исходники сохранены.');};
+$('help').onclick=()=>{$('help-dialog').showModal();};$('close-help').onclick=()=>$('help-dialog').close();
+$('help-dialog').onclick=e=>{if(e.target===$('help-dialog'))$('help-dialog').close();};
+function renderHelp(){
+ $('help-content').innerHTML=locale==='en'?`
+ <h3>Quick start</h3><ol><li>Select layers, a group, or a frame.</li><li>Adjust any of the nine panels. Enable Black & White or Photo Filter when needed.</li><li>Choose Editable layers or Single image and click Create copy.</li></ol>
+ <p>The copy appears to the right at page level. Originals are preserved. Hold Before to compare. Save a JSON preset before closing.</p>
+ <h3>Choose your output</h3><p><b>Editable layers</b> adjusts fills, gradients, image fills, strokes, shadow colors, and nested layers separately. Text and geometry remain editable. Changed colors may detach from styles and variables. Unsupported properties are counted in the result.</p>
+ <p><b>Single image</b> adjusts the rendered composition and outputs one PNG per selected root, up to 4096 px per side. Group content inside one frame for a single composite. The copy is flattened; the original remains editable.</p>
+ <h3>Limitations</h3><p>8-bit sRGB. Custom algorithms; results are not identical to Photoshop. Preview shows the first object at reduced size. Layer blending and image filters can make editable output differ from the composite preview. Animation, video, shader parameters, and layout grid colors are not edited in layers mode. Start each variation from your original to avoid cumulative changes.</p>
+ <h3>Privacy · effective 16 November 2026</h3><p>Color Lab reads the selected layers, descendants, paints, image bytes, and available fonts to provide previews and create adjusted copies. Processing runs locally in the Figma plugin. It makes no external network requests and includes no analytics, ads, third-party APIs, authentication, or payment system.</p>
+ <p>Session settings and image buffers exist in memory while the plugin is open. Generated copies are stored in your Figma document under Figma’s normal storage and sharing rules. JSON presets are saved only when you choose to export them; an imported preset is read only for its adjustment settings. Color Lab does not operate a server or maintain a user database.</p>
+ <h3>Support</h3><p>Email <b>info@er-design.space</b>. Include the plugin version, Figma version, output mode, and a brief description. Share a minimal sample only if you choose to; do not include confidential artwork.</p>`:`
+ <h3>Быстрый старт</h3><ol><li>Выделите слои, группу или фрейм.</li><li>Настройте коррекции. Для Black & White и Photo Filter включите флажок раздела.</li><li>Выберите режим и нажмите «Создать копию».</li></ol><p>Копия появится справа на уровне страницы. Исходники сохраняются. Удерживайте «до» для сравнения. Перед закрытием сохраните пресет JSON.</p>
+ <h3>Два режима</h3><p><b>Редактируемые слои</b>: отдельно обрабатываются заливки, градиенты, фото, обводки, цвета теней и вложенные слои. Текст и геометрия редактируются. Связи изменённых цветов со стилями и переменными могут разрываться. Число пропущенных свойств выводится после обработки.</p><p><b>Единое изображение</b>: общая коррекция композиции и копия PNG до 4096 px по стороне. Для общей композиции поместите объекты в один фрейм. Копия растровая; исходник остаётся редактируемым.</p>
+ <h3>Ограничения</h3><p>8-битный sRGB. Алгоритмы собственные, результат отличается от Photoshop. Превью показывает первый объект в уменьшенном размере. Наложения и фильтры изображений могут дать другой результат в режиме слоёв. Цвета сеток, параметры шейдеров, анимация и видео не редактируются. Для нового варианта снова выделяйте оригинал.</p>
+ <h3>Конфиденциальность · 16 ноября 2026</h3><p>Color Lab читает выделенные слои, их содержимое, заливки, байты изображений и доступные шрифты для предпросмотра и создания копий. Обработка выполняется локально в плагине. Нет внешних запросов, аналитики, рекламы, сторонних API, регистрации или платежей.</p><p>Настройки сеанса и изображения хранятся в памяти до закрытия плагина. Созданные копии сохраняются в документе по обычным правилам Figma. JSON-пресет сохраняется только по вашей команде; импортированный файл читается только ради настроек коррекции. У Color Lab нет сервера или базы пользователей.</p>
+ <h3>Поддержка</h3><p>Напишите на <b>info@er-design.space</b>. Укажите версию плагина и Figma, режим результата и описание проблемы. Отправляйте пример только по своему желанию, без конфиденциальных материалов.</p>`;
+}
+async function demoBytes(){
+ const c=document.createElement('canvas');c.width=1552;c.height=580;const ctx=c.getContext('2d');
+ const g=ctx.createLinearGradient(0,0,c.width,c.height);g.addColorStop(0,'#ecc78c');g.addColorStop(.5,'#ca8b78');g.addColorStop(1,'#668489');ctx.fillStyle=g;ctx.fillRect(0,0,c.width,c.height);
+ ctx.fillStyle='#f7e3ac';ctx.beginPath();ctx.arc(1160,180,92,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#587b7c';ctx.beginPath();ctx.moveTo(0,410);ctx.bezierCurveTo(450,60,740,650,1552,300);ctx.lineTo(1552,580);ctx.lineTo(0,580);ctx.fill();
+ ctx.fillStyle='#304f56';ctx.beginPath();ctx.moveTo(0,530);ctx.bezierCurveTo(500,260,1050,560,1552,405);ctx.lineTo(1552,580);ctx.lineTo(0,580);ctx.fill();
+ const blob=await new Promise(r=>c.toBlob(r,'image/png'));return new Uint8Array(await blob.arrayBuffer());
+}
+$('demo').onclick=async()=>{if(working)return;imageCancelled=false;setWorking(true);status('Создаём демо…');try{post({type:'demo',bytes:await demoBytes()});}catch{setWorking(false);status('Не удалось создать демо. Выделите собственный фрейм.','error');}};
+
+setLocale(locale);post({type:'refresh'});
+</script></body></html>

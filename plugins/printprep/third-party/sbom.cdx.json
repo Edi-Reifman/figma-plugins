@@ -1,0 +1,315 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:d8de4d7b-6e99-5710-b958-0dd4ee7afa9a",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-19T14:21:31.437Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "WASM Zoo metadata generator",
+          "version": "0.13.0",
+          "externalReferences": [
+            {
+              "type": "vcs",
+              "url": "https://github.com/ttomohisa/wasm-zoo"
+            }
+          ]
+        },
+        {
+          "type": "application",
+          "name": "Emscripten",
+          "version": "6.0.7",
+          "properties": [
+            {
+              "name": "wasm-zoo:commit",
+              "value": "4483d70a78098ed5d860dff2dc21f3025b2da2ee"
+            }
+          ]
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:generic/wasm-zoo/ghostscript@10.08.0?profile=browser-full&zoo=0.7.2",
+      "group": "wasm-zoo",
+      "name": "ghostscript",
+      "version": "10.08.0",
+      "licenses": [
+        {
+          "license": {
+            "name": "AGPL-3.0-or-later"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "wasm-zoo:profile",
+          "value": "browser-full"
+        },
+        {
+          "name": "wasm-zoo:builder-version",
+          "value": "0.7.2"
+        },
+        {
+          "name": "wasm-zoo:target",
+          "value": "browser"
+        },
+        {
+          "name": "wasm-zoo:sbom-completeness",
+          "value": "bundled component names are notice-derived; versions may be unspecified"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "upstream:ghostscript:10.08.0",
+      "name": "Ghostscript",
+      "version": "10.08.0",
+      "licenses": [
+        {
+          "license": {
+            "name": "AGPL-3.0-or-later / commercial options upstream"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/ArtifexSoftware/ghostpdl"
+        },
+        {
+          "type": "website",
+          "url": "https://www.ghostscript.com/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "wasm-zoo:upstream-ref",
+          "value": "gs10.08.0"
+        },
+        {
+          "name": "wasm-zoo:upstream-commit",
+          "value": "4d175558193ad50d6fbc329fe28dbb48af626126"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "external:ghostscript:browser-full:0:ghostscript-bundled-third-party-source-set-from-the-official",
+      "name": "Ghostscript bundled third-party source set from the official",
+      "version": "10.08.0",
+      "properties": [
+        {
+          "name": "wasm-zoo:source-description",
+          "value": "Ghostscript bundled third-party source set from the official 10.08.0 release archive"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:brotli",
+      "name": "brotli",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:contrib",
+      "name": "contrib",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:cups",
+      "name": "cups",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:extract",
+      "name": "extract",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:freetype",
+      "name": "freetype",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:jbig2dec",
+      "name": "jbig2dec",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:lcms2mt",
+      "name": "lcms2mt",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:libpng",
+      "name": "libpng",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:openjpeg",
+      "name": "openjpeg",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:tesseract",
+      "name": "tesseract",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:tiff",
+      "name": "tiff",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bundled:ghostscript:zlib",
+      "name": "zlib",
+      "properties": [
+        {
+          "name": "wasm-zoo:inventory-source",
+          "value": "official-source-license-inventory"
+        },
+        {
+          "name": "wasm-zoo:version-status",
+          "value": "not separately declared by Zoo metadata"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:generic/wasm-zoo/ghostscript@10.08.0?profile=browser-full&zoo=0.7.2",
+      "dependsOn": [
+        "upstream:ghostscript:10.08.0",
+        "external:ghostscript:browser-full:0:ghostscript-bundled-third-party-source-set-from-the-official",
+        "bundled:ghostscript:brotli",
+        "bundled:ghostscript:contrib",
+        "bundled:ghostscript:cups",
+        "bundled:ghostscript:extract",
+        "bundled:ghostscript:freetype",
+        "bundled:ghostscript:jbig2dec",
+        "bundled:ghostscript:lcms2mt",
+        "bundled:ghostscript:libpng",
+        "bundled:ghostscript:openjpeg",
+        "bundled:ghostscript:tesseract",
+        "bundled:ghostscript:tiff",
+        "bundled:ghostscript:zlib"
+      ]
+    }
+  ]
+}

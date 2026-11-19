@@ -1,0 +1,16 @@
+{
+  "name": "PrintPrep — CMYK PDF, EPS & TIFF",
+  "id": "1703846223061012575",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": [
+    "figma"
+  ],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  }
+}

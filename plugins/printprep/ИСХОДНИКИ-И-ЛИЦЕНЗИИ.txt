@@ -1,0 +1,49 @@
+PrintPrep 0.5.1-rc.1
+
+Исходники PrintPrep включены в src/, build.cjs, configure-release.cjs,
+release-check.cjs и tests/. Совместная сборка распространяется под GNU AGPLv3.
+Полный текст лицензии: LICENSE.
+
+EPS: Ghostscript 10.08.0, сборка @wasm-zoo/ghostscript 0.7.2, AGPL-3.0-or-later.
+Оригинальные gs-core.js и gs-core.wasm не изменялись. Адаптер плагина:
+src/eps-worker.js. Метаданные сборки, хеши, лицензии и сведения о происхождении
+находятся в vendor/ghostscript/.
+
+Полные исходники Ghostscript и зависимостей релиза:
+https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10080/ghostscript-10.08.0.tar.xz
+SHA-256: c20492bc8ebb96c87fa2e52a0926e1cda8cde95d66145e018ac713fed5da38cf
+Git commit: 4d175558193ad50d6fbc329fe28dbb48af626126
+https://github.com/ArtifexSoftware/ghostpdl/tree/4d175558193ad50d6fbc329fe28dbb48af626126
+
+Скрипты и настройки соответствующей WASM-сборки:
+https://github.com/ttomohisa/wasm-zoo/tree/b557dd168027b795bee72648c5596a751e059448/builders/ghostscript
+https://github.com/ttomohisa/wasm-zoo/archive/b557dd168027b795bee72648c5596a751e059448.zip
+Emscripten: 6.0.7. Полные сведения: vendor/ghostscript/provenance.json.
+
+Лицензии сторонних компонентов: vendor/ghostscript/THIRD-PARTY-LICENSES/.
+Copyright Ghostscript: Artifex Software, Inc. и другие авторы.
+
+PDF: pdf-lib 1.17.1, MIT.
+Исходники: https://github.com/Hopding/pdf-lib/tree/v1.17.1
+Архив: https://github.com/Hopding/pdf-lib/archive/refs/tags/v1.17.1.zip
+Лицензия: PDF-LIB-LICENSE.md и vendor/pdf-lib/LICENSE.md.
+Включённая браузерная сборка: vendor/pdf-lib/pdf-lib.min.js.
+
+Сборка PrintPrep без сети: node build.cjs. Проверки: npm test.
+Для пересборки самого Ghostscript нужны исходники и инструменты, указанные выше.
+Весь архив PrintPrep-source должен оставаться доступным пользователям публичной
+версии. Перед публикацией URL архива записывается через configure-release.cjs.
+
+ICC-профили: vendor/icc/. Официальные default_cmyk.icc (общий SWOP) и
+default_rgb.icc (sRGB, переименован в srgb.icc) из того же релиза Ghostscript.
+Ссылки и сведения: vendor/icc/README.txt. Профили не изменялись.
+Профиль пользователя не сохраняется в исходниках и не отправляется в сеть.
+
+Упаковка runtime для лимита Figma 15 МБ:
+Ghostscript WASM сжат Brotli без потерь и закодирован безопасным ASCII91.
+Распаковка выполняется локально в export Worker. Восстановленные байты совпадают
+с оригинальной сборкой Ghostscript; исходный бинарный файл не изменялся.
+Распаковщик: brotli-compress 2.2.2, только pure-JS js.cjs, MIT (Google),
+с дополнительными Apache-2.0 notices пакета. Лицензии: vendor/brotli/.
+Исходники: https://github.com/kyr0/brotli-compress/tree/7e633f31b83e7d522fc2ff7c21905d30e82eab71
+Загрузки runtime из сети нет. Размер загружаемого кода фиксирует build-size.json.

@@ -1,0 +1,8 @@
+Color Lab — Adjustments 1.0.0
+Prepared for Er-Design.
+
+Source code and the included code-drawn demonstration graphics were created for this plugin. No third-party runtime packages, photography, brand logos, or stock illustrations are bundled.
+
+Figma and Photoshop are trademarks of their respective owners. Color Lab is an independent plugin and does not claim affiliation with Adobe or Figma. Its original algorithms do not reproduce Photoshop output exactly.
+
+The source package is provided to the creator for development and distribution of the Figma plugin. No public open-source license is granted by this package. Published plugin distribution remains subject to the creator's chosen terms and the applicable Figma Community terms.

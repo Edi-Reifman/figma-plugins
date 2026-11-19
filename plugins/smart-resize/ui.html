@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>
+*{box-sizing:border-box}body{margin:0;padding:20px;font:12px/1.5 Inter,Arial,sans-serif;color:var(--figma-color-text,#17213a);background:var(--figma-color-bg,#fff)}h1{font-size:23px;letter-spacing:-.8px;margin:0}h2{font-size:13px;margin:18px 0 8px}.brand{display:flex;align-items:center;justify-content:space-between}.badge{font-size:10px;background:#e9f6f0;color:#126441;border-radius:10px;padding:3px 8px}.sub,small{color:var(--figma-color-text-secondary,#647087)}p{margin:5px 0 10px}.box{border:1px solid var(--figma-color-border,#dfe4ee);border-radius:10px;padding:12px;margin:12px 0}.row{display:flex;gap:8px;align-items:center}.row>*{min-width:0;flex:1}button,input,select,textarea{font:inherit;color:inherit;border:1px solid var(--figma-color-border,#d4dbe6);border-radius:6px;background:var(--figma-color-bg,#fff);padding:8px}button{cursor:pointer;font-weight:600}button:hover{border-color:#5e64e8}button:disabled{opacity:.5;cursor:wait}button.primary{background:#5557e8;color:white;border-color:#5557e8;width:100%;font-size:13px;padding:12px;margin-top:16px}input,select,textarea{width:100%}textarea{resize:vertical;min-height:96px;font-family:ui-monospace,monospace}label{display:block;margin:8px 0 4px}.choices{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.choice{border:1px solid var(--figma-color-border,#dfe4ee);padding:4px 8px;border-radius:5px;margin:0;white-space:nowrap}.choice input{width:auto;vertical-align:middle;margin-right:5px}.layer{display:flex;align-items:center;gap:8px;border-top:1px solid var(--figma-color-border,#edf0f5);padding:7px 0}.layer .name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.layer select{width:155px}.layer small{display:block;font-size:10px}.status{margin-top:12px;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:8px;padding:10px;background:var(--figma-color-bg-secondary,#f3f5fb)}.status:empty{display:none}.status.error{color:#b12d3c;background:#fff0f1}.status.success{color:#176344;background:#edfaf3}.inline{display:flex;gap:6px;align-items:center;margin-top:6px}.inline input{width:auto}.divider{border-top:1px solid var(--figma-color-border,#dfe4ee);margin:18px 0 4px}#layers{max-height:260px;overflow:auto}summary{cursor:pointer;font-weight:600;margin:12px 0}#source{overflow-wrap:anywhere}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #6b67ef;outline-offset:2px}#progress{font-variant-numeric:tabular-nums}
+</style></head><body>
+<div class="brand"><h1>Smart Resize</h1><span class="badge">OFFLINE · 2.0.0</span></div>
+<p class="sub">Один макет → серия редактируемых форматов</p>
+<div class="box"><strong id="source">Выберите исходный Frame в Figma</strong><p class="sub" id="dimensions">Затем нажмите кнопку ниже.</p><button id="pick" style="width:100%">Использовать выделенный макет</button>
+<label for="sourceSelect">Или выберите Frame на текущей странице</label>
+<select id="sourceSelect"><option value="">Выберите Frame…</option></select>
+<div class="row" style="margin-top:8px"><button id="refreshFrames">Обновить список</button><button id="reveal">Показать исходник</button></div>
+<small id="frameHint">Можно выбрать и слой внутри нужного Frame.</small></div>
+<h2>01 / Размеры</h2>
+<label for="preset">Сохранённый набор</label><div class="row"><select id="preset"><option value="">Свой список</option></select><button id="delete" style="flex:0 0 80px">Удалить</button></div>
+<div id="deleteConfirm" class="box" hidden><p id="deletePrompt"></p><div class="row"><button id="deleteYes">Удалить набор</button><button id="deleteNo">Отмена</button></div></div>
+<label for="sizes">Размеры в px — через запятую или с новой строки</label><textarea id="sizes" spellcheck="false">1080x1080
+1080x1920
+1200x628</textarea>
+<button id="applySizes" style="width:100%;margin-top:6px">Применить список</button>
+<div id="choices" class="choices" aria-label="Размеры для генерации"></div><small id="sizeCount"></small>
+<label for="presetName">Имя набора (существующее имя заменит набор)</label><div class="row"><input id="presetName" maxlength="60" placeholder="Например: РСЯ / основной"><button id="save" style="flex:0 0 95px">Сохранить</button></div>
+<h2>02 / Адаптация</h2><label for="mode">Режим</label><select id="mode"><option value="auto">Авто — определить роли по слоям</option><option value="manual">Вручную — использовать назначенные роли</option></select>
+<p class="sub" id="modeHelp">Анализ блоков и подбор композиции по их размерам. Сначала нажмите «Проверить размеры». Сохранённые ручные роли в этом режиме не используются.</p>
+<details id="rolePanel"><summary>Роли слоёв</summary><p class="sub">Роль назначается верхнему слою или группе внутри исходника. Вложенный объект выбирает свою верхнюю группу. Назначение сохраняет только метку; геометрия исходника не меняется.</p><div class="row"><select id="selectedRole" aria-label="Роль выделенного слоя"></select><button id="assign">Назначить выделенному</button></div><div id="layers"></div></details>
+<div class="divider"></div><div class="row"><div><label for="columns">Колонки</label><input id="columns" type="number" min="1" max="10" value="3"></div><div><label for="gap">Интервал, px</label><input id="gap" type="number" min="0" max="2000" value="80"></div></div>
+<label for="minFont">Минимальный кегль, px</label><input id="minFont" type="number" min="6" max="40" value="10">
+<label class="inline"><input id="compact" type="checkbox">Сокращённая композиция: скрыть только блоки с приоритетом «Необязательный»</label>
+<label class="inline"><input id="allowSmall" type="checkbox">Разрешить генерацию с текстом мельче минимума</label>
+<button id="analyze" style="width:100%;margin-top:10px">Проверить размеры</button>
+<button class="primary" id="generate">Создать ресайзы</button><p class="sub" style="margin-top:8px">Копии появятся справа от макетов на странице. Исходный дизайн сохранится. Для отмены — Undo в Figma.</p>
+<div id="progress" role="status"></div><div id="status" class="status" role="status" aria-live="polite"></div>
+<script>/* Smart Resize: pure geometry and validation. No Figma or DOM dependency. */
+(function(root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.SmartResize = factory();
+})(typeof globalThis !== 'undefined' ? globalThis : this, function() {
+  'use strict';
+  const ROLES = ['Logo','Headline','Description','CTA','Main Visual','Background'];
+  function sizes(input) {
+    const lines = typeof input === 'string' ? input.trim().replace(/\.$/, '').split(/[\n;]+/).flatMap(line=>/^\s*\d+\s*,\s*\d+\s*$/.test(line)?[line]:line.split(',')).filter(s=>s.trim()) : input;
+    if (!Array.isArray(lines) || !lines.length || lines.length > 50) throw Error('Введите от 1 до 50 размеров.');
+    const result = [], seen = new Set();
+    for (const line of lines) {
+      let w,h;
+      if (typeof line === 'string') {
+        const m = line.trim().match(/^(\d+)\s*[xх×*,]\s*(\d+)$/i);
+        if (!m) throw Error('Неверный размер: '+line+'. Пример: 1080x1920');
+        w=Number(m[1]); h=Number(m[2]);
+      } else { w=line && line.width; h=line && line.height; }
+      if (!Number.isInteger(w)||!Number.isInteger(h)||w<16||h<16||w>10000||h>10000) throw Error('Стороны: целые числа от 16 до 10000 px.');
+      const key=w+'x'+h;
+      if (!seen.has(key)) { result.push({width:w,height:h}); seen.add(key); }
+    }
+    return result;
+  }
+  function presets(value) {
+    if (!Array.isArray(value) || value.length>40) throw Error('Допустимо до 40 наборов.');
+    const names=new Set();
+    return value.map(p=>{
+      const name=typeof p.name==='string'?p.name.trim():'';
+      if(!name||name.length>60||names.has(name)) throw Error('Имена наборов должны быть уникальными, от 1 до 60 символов.');
+      names.add(name); return {name,sizes:sizes(p.sizes)};
+    });
+  }
+  function infer(items, sw, sh) {
+    const result = {}, texts=items.filter(n=>n.visible!==false&&(n.type==='TEXT'||n.textCount>0)&&!n.hasImage).sort((a,b)=>(b.textSize||b.fontSize||b.height)-(a.textSize||a.fontSize||a.height));
+    for(const n of items) {
+      const name=n.name.toLowerCase(); let r='';
+      if (/(background|backdrop|фон|^bg\b)/i.test(name)) r='Background';
+      else if (/(logo|логотип|бренд)/i.test(name)) r='Logo';
+      else if (/(headline|heading|title|заголов)/i.test(name)) r='Headline';
+      else if (/(description|subtitle|описан|подзаголов|дисклеймер|legal)/i.test(name)) r='Description';
+      else if (/(^cta\b|button|кнопк|призыв)/i.test(name)) r='CTA';
+      else if (/(visual|hero|product|продукт|товар|объект)/i.test(name)) r='Main Visual';
+      else if(n.type==='ELLIPSE'&&(n.x<0||n.y<0)&&n.width>sw*.4&&n.height>sh*.8) r='Background';
+      else if(n.type!=='TEXT'&&n.width>=sw*.94&&n.height>=sh*.94&&n.x<=sw*.04&&n.y<=sh*.04) r='Background';
+      if(!r&&n.textCount>0&&n.width<sw*.4&&n.height<sh*.25&&/(подробнее|купить|заказать|узнать|learn more|shop|buy|order)/i.test(n.textContent||''))r='CTA';
+      result[n.id]=r;
+    }
+    if(!Object.values(result).includes('Headline')) {
+      const n=texts.find(n=>!result[n.id]); if(n) result[n.id]='Headline';
+    }
+    for(const n of texts) if(!result[n.id]) result[n.id]='Description';
+    if(!Object.values(result).includes('Main Visual')) {
+      const n=items.filter(n=>n.visible!==false&&!result[n.id]&&n.type!=='TEXT').sort((a,b)=>b.width*b.height-a.width*a.height)[0];
+      if(n) result[n.id]='Main Visual';
+    }
+    return result;
+  }
+  // Candidate-based composition: measure present blocks, solve scale, score feasible layouts.
+  function classify(items,sw,sh,mode){
+    const inferred=infer(items,sw,sh), roles={}, uncertain=[];
+    for(const n of items){
+      roles[n.id]=mode==='manual'?(ROLES.includes(n.role)?n.role:''):inferred[n.id];
+      const explicit=/(background|backdrop|фон|^bg\b|logo|логотип|бренд|headline|heading|title|заголов|description|subtitle|описан|cta|button|кнопк|visual|hero|product|продукт|товар)/i.test(n.name);
+      if(n.visible!==false&&mode==='auto'&&!explicit&&(!roles[n.id]||((n.textCount||0)>0&&n.hasImage)))uncertain.push(n.name);
+    }
+    return {roles,uncertain};
+  }
+  function compose(items,sw,sh,w,h,mode,options){
+    options=options||{};
+    const {roles,uncertain}=classify(items,sw,sh,mode);
+    const minFont=Number.isFinite(options.minFont)?Math.max(6,Math.min(40,options.minFont)):10;
+    const omitted=[],active=[];
+    for(const n of items){
+      if(n.visible===false||roles[n.id]==='Background')continue;
+      if(options.compact&&n.priority==='optional'){omitted.push(n.id);continue;}
+      active.push(n);
+    }
+    const order={Logo:0,Headline:1,Description:2,'Main Visual':3,CTA:4};
+    active.sort((a,b)=>(order[roles[a.id]]===undefined?3:order[roles[a.id]])-(order[roles[b.id]]===undefined?3:order[roles[b.id]])||a.y-b.y||a.x-b.x);
+    const margin=Math.min(w,h)*.05,gap=Math.min(w,h)*.025;
+    const box={x:margin,y:margin,width:w-2*margin,height:h-2*margin};
+    const widthAt=(n,k)=>Math.max(.001,n.width*k);
+    function isFlow(n){return n.type==='TEXT'&&(roles[n.id]==='Headline'||roles[n.id]==='Description');}
+    function heightAt(n,k,width){
+      const fs=n.fontSize||n.textSize||0;
+      if(isFlow(n)&&fs){
+        const count=(n.textContent||'').trim().length;
+        const lines=count?Math.max(1,Math.ceil(count*fs*k*.56/width)):Math.max(1,Math.ceil(n.height*k/(fs*k*1.25)));
+        return Math.max(n.height*k,lines*fs*k*1.25);
+      }
+      return Math.max(.001,n.height*k);
+    }
+    function stack(ns,b){
+      if(!ns.length)return {entries:{},scale:Infinity};
+      const localGap=Math.min(gap,b.height/(2*Math.max(1,ns.length-1)));
+      let lo=0,hi=Math.min(...ns.map(n=>b.width/Math.max(n.width,.001)))*2;
+      function heights(k){return ns.map(n=>heightAt(n,k,b.width));}
+      function valid(k){return ns.every(n=>isFlow(n)||widthAt(n,k)<=b.width+.001)&&heights(k).reduce((a,c)=>a+c,0)+localGap*(ns.length-1)<=b.height;}
+      for(let i=0;i<32;i++){const mid=(lo+hi)/2;if(valid(mid))lo=mid;else hi=mid;}
+      const hs=heights(lo),total=hs.reduce((a,c)=>a+c,0)+localGap*(ns.length-1);let y=b.y+(b.height-total)/2;const entries={};
+      ns.forEach((n,i)=>{const flow=isFlow(n);const width=flow?b.width:n.width*lo;
+        entries[n.id]={x:b.x+(b.width-width)/2,y,width,height:hs[i],scale:lo,role:roles[n.id],cell:{x:b.x,y,width:b.width,height:hs[i]},flow};y+=hs[i]+localGap;});
+      return {entries,scale:lo};
+    }
+    const candidates=[];
+    function candidate(name,parts){
+      const entries=Object.assign({},...parts.map(p=>p.entries));
+      const scales=active.map(n=>entries[n.id].scale);
+      const weighted=scales.map((k,i)=>k*(active[i].priority==='essential'?.8:1));
+      const smallest=weighted.length?Math.min(...weighted):1;
+      const mean=scales.length?scales.reduce((a,c)=>a+c,0)/scales.length:1;
+      // A large visual must not win by making the offer unreadably small.
+      const score=smallest*.85+Math.min(mean,smallest*1.5)*.15;
+      candidates.push({name,entries,score});
+    }
+    candidate('Вертикальная композиция',[stack(active,box)]);
+    const visuals=active.filter(n=>roles[n.id]==='Main Visual'),copy=active.filter(n=>roles[n.id]!=='Main Visual');
+    if(visuals.length&&copy.length){
+      for(const fraction of [.3,.4,.5,.6,.7]){
+        const left={x:box.x,y:box.y,width:(box.width-gap)*fraction,height:box.height};
+        const right={x:box.x+left.width+gap,y:box.y,width:box.width-left.width-gap,height:box.height};
+        // Keep source-side preference where the visual is left of the text.
+        const visualLeft=visuals.reduce((s,n)=>s+n.x+n.width/2,0)/visuals.length<copy.reduce((s,n)=>s+n.x+n.width/2,0)/copy.length;
+        candidate(visualLeft?'Визуал слева':'Визуал справа',[stack(visualLeft?visuals:copy,left),stack(visualLeft?copy:visuals,right)]);
+      }
+    }
+    if(active.length>1){
+      let lo=0,hi=Math.max(w/sw,h/sh)*8;
+      for(let i=0;i<32;i++){const k=(lo+hi)/2;const valid=active.reduce((s,n)=>s+n.width*k,0)+gap*(active.length-1)<=box.width&&active.every(n=>n.height*k<=box.height);if(valid)lo=k;else hi=k;}
+      const total=active.reduce((s,n)=>s+n.width*lo,0)+gap*(active.length-1);let x=box.x+(box.width-total)/2;const entries={};
+      for(const n of active){const b={x,y:box.y+(box.height-n.height*lo)/2,width:n.width*lo,height:n.height*lo};entries[n.id]=Object.assign({},b,{scale:lo,role:roles[n.id],cell:b,flow:false});x+=b.width+gap;}
+      candidate('Горизонтальная полоса',[{entries}]);
+    }
+    const best=candidates.sort((a,b)=>b.score-a.score)[0];
+    const output=best.entries,warnings=[];
+    for(const n of items){
+      if(roles[n.id]==='Background'){
+        const k=Math.max(w/sw,h/sh);
+        output[n.id]={x:(w-sw*k)/2+n.x*k,y:(h-sh*k)/2+n.y*k,width:n.width*k,height:n.height*k,scale:k,role:'Background',backgroundTransform:true};
+      }else if(!output[n.id])output[n.id]={x:n.x,y:n.y,width:n.width,height:n.height,scale:1,role:roles[n.id],hidden:omitted.includes(n.id)};
+    }
+    let readable=true,smallestFont=Infinity;
+    for(const n of active){const fs=n.minFont||n.fontSize||n.textSize||0;if(fs){const actual=fs*output[n.id].scale;smallestFont=Math.min(smallestFont,actual);if(actual<minFont){readable=false;warnings.push('«'+n.name+'»: около '+actual.toFixed(1)+' px (минимум '+minFont+').');}}}
+    if(uncertain.length)warnings.push('Назначьте роли для уверенной адаптации: '+uncertain.join(', '));
+    if(omitted.length)warnings.push('Сокращённая композиция: скрыто необязательных блоков — '+omitted.length+'.');
+    return {plan:output,layout:best.name,readable,minFont:smallestFont===Infinity?null:smallestFont,warnings,uncertain,omitted};
+  }
+  function plan(items,sw,sh,w,h,mode,options){return compose(items,sw,sh,w,h,mode,options).plan;}
+  function grid(ss,startX,startY,cols,gap) {
+    const result=[];let y=startY;
+    for(let i=0;i<ss.length;i+=cols) {
+      let x=startX, rowH=0;
+      for(const s of ss.slice(i,i+cols)) {result.push({x,y});x+=s.width+gap;rowH=Math.max(rowH,s.height);}
+      y+=rowH+gap;
+    }
+    return result;
+  }
+  return {ROLES,sizes,presets,infer,plan,grid,compose,classify};
+});
+</script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id), ROLES=SmartResize.ROLES;
+let presets=[],list=[],checked=new Set(),busy=false,hasSource=false,dirty=true,pendingDelete='';
+function send(type,data){parent.postMessage({pluginMessage:Object.assign({type},data||{})},'*');}
+function status(message,kind){$('status').textContent=message;$('status').className='status '+(kind||'');}
+function options(select,value,auto){select.replaceChildren();for(const r of ['',...ROLES]){const o=document.createElement('option');o.value=r;o.textContent=r||'Без роли';select.append(o);}select.value=value||'';}
+options($('selectedRole'),'Headline');
+function renderSizes(ss){list=ss;checked=new Set(ss.map((s,i)=>i));$('choices').replaceChildren();ss.forEach((s,i)=>{const l=document.createElement('label');l.className='choice';const c=document.createElement('input');c.type='checkbox';c.checked=true;c.onchange=()=>{c.checked?checked.add(i):checked.delete(i);count();};l.append(c,document.createTextNode(s.width+'×'+s.height));$('choices').append(l);});dirty=false;count();}
+function count(){$('sizeCount').textContent='Выбрано '+checked.size+' из '+list.length;}
+function parse(){renderSizes(SmartResize.sizes($('sizes').value));}
+function selected(){if(dirty)parse();const ss=list.filter((_,i)=>checked.has(i));if(!ss.length)throw Error('Выберите хотя бы один размер.');return ss;}
+function attempt(fn){try{fn();}catch(e){status(e.message,'error');}}
+$('sizes').oninput=()=>{dirty=true;$('sizeCount').textContent='Список изменён — примените его перед выбором размеров.';};
+$('applySizes').onclick=()=>attempt(parse);
+$('pick').onclick=()=>send('pick');
+$('sourceSelect').onchange=()=>{const id=$('sourceSelect').value;if(id)send('pick',{id});};
+$('refreshFrames').onclick=()=>send('refresh-frames');
+$('reveal').onclick=()=>send('reveal');
+$('preset').onchange=()=>{const p=presets.find(p=>p.name===$('preset').value);if(p){$('sizes').value=p.sizes.map(s=>s.width+'x'+s.height).join('\n');$('presetName').value=p.name;renderSizes(p.sizes);}};
+$('save').onclick=()=>attempt(()=>{const name=$('presetName').value.trim();if(!name)throw Error('Введите имя набора.');send('save',{name,sizes:selected()});});
+$('delete').onclick=()=>{const name=$('preset').value;if(!name){status('Выберите сохранённый набор.','error');return;}pendingDelete=name;$('deletePrompt').textContent='Удалить набор «'+name+'»?';$('deleteConfirm').hidden=false;};
+$('deleteYes').onclick=()=>{if(pendingDelete)send('delete',{name:pendingDelete});$('deleteConfirm').hidden=true;pendingDelete='';};
+$('deleteNo').onclick=()=>{$('deleteConfirm').hidden=true;pendingDelete='';};
+$('assign').onclick=()=>send('role',{role:$('selectedRole').value});
+$('mode').onchange=()=>{const manual=$('mode').value==='manual';$('rolePanel').open=manual;$('modeHelp').textContent=manual?'Назначенные роли перестраивают композицию. Слои без ролей включаются в общую раскладку. Назначьте роли для точной композиции.':'Анализ блоков и подбор композиции по их размерам. Сначала нажмите «Проверить размеры». Сохранённые ручные роли в этом режиме не используются.';};
+$('analyze').onclick=()=>attempt(()=>{if(!hasSource)throw Error('Выберите исходный Frame.');send('analyze',{mode:$('mode').value,sizes:selected(),columns:Number($('columns').value),gap:Number($('gap').value),compact:$('compact').checked,minFont:Number($('minFont').value)});});
+$('generate').onclick=()=>attempt(()=>{if(!hasSource)throw Error('Выберите исходный Frame.');status('');$('progress').textContent='Подготовка…';send('generate',{mode:$('mode').value,sizes:selected(),columns:Number($('columns').value),gap:Number($('gap').value),compact:$('compact').checked,allowSmall:$('allowSmall').checked,minFont:Number($('minFont').value)});});
+window.onmessage=event=>{const m=event.data&&event.data.pluginMessage;if(!m||typeof m.type!=='string')return;
+  if(m.type==='frames'){
+    $('sourceSelect').replaceChildren();const empty=document.createElement('option');empty.value='';empty.textContent=m.frames.length?'Выберите Frame…':'На странице нет доступных Frame';$('sourceSelect').append(empty);
+    for(const f of m.frames){const o=document.createElement('option');o.value=f.id;o.textContent=f.name+' · '+f.width+'×'+f.height;$('sourceSelect').append(o);}
+    $('sourceSelect').value=m.selected||'';
+    $('frameHint').textContent=m.truncated?'Показаны первые 300 Frame. Остальные можно выбрать на холсте.':'Источник закреплён. Для смены выберите другой Frame здесь или используйте выделенный макет.';
+  }
+  if(m.type==='presets'){const prev=m.selected||$('preset').value;presets=m.presets;$('preset').replaceChildren();const o=document.createElement('option');o.value='';o.textContent='Свой список';$('preset').append(o);for(const p of presets){const o=document.createElement('option');o.value=p.name;o.textContent=p.name;$('preset').append(o);}$('preset').value=presets.some(p=>p.name===prev)?prev:'';}
+  if(m.type==='source'){
+    hasSource=!!m.source&&!m.issue;$('source').textContent=m.source?m.source.name:'Выберите исходный Frame в Figma';$('dimensions').textContent=m.source?m.source.width+' × '+m.source.height+' px · '+m.layers.length+' верхних слоёв':'Затем нажмите кнопку ниже.';$('layers').replaceChildren();
+    for(const n of m.layers){const row=document.createElement('div');row.className='layer';const label=document.createElement('div');label.className='name';label.title=n.name;label.append(document.createTextNode(n.name));const small=document.createElement('small');small.textContent='Авто: '+(n.auto||'без роли')+(n.visible?'':' · скрыт');label.append(small);const select=document.createElement('select');select.setAttribute('aria-label','Роль '+n.name);options(select,n.role);select.onchange=()=>send('role',{id:n.id,role:select.value});const priority=document.createElement('select');priority.setAttribute('aria-label','Приоритет '+n.name);priority.style.width='105px';for(const [value,text] of [['essential','Главный'],['normal','Обычный'],['optional','Необязательный']]){const o=document.createElement('option');o.value=value;o.textContent=text;priority.append(o);}priority.value=n.priority||'normal';priority.onchange=()=>send('priority',{id:n.id,priority:priority.value});row.append(label,select,priority);$('layers').append(row);}
+    if(m.issue)status(m.issue,'error');
+  }
+  if(m.type==='busy'){busy=m.value;for(const b of document.querySelectorAll('button,select,input,textarea'))b.disabled=busy;}
+  if(m.type==='progress')$('progress').textContent='Создано '+m.current+' / '+m.total;
+  if(m.type==='error'){$('progress').textContent='';status(m.message,'error');}
+  if(m.type==='analysis')status(m.message);
+  if(m.type==='notice')status(m.message,'success');
+  if(m.type==='done'){$('progress').textContent='';status('Готово: '+m.count+' Frame.'+(m.warnings.length?'\n\nПроверьте:\n• '+m.warnings.join('\n• '):''),'success');}
+};
+parse();send('init');
+</script></body></html>

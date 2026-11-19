@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "package": "ghostscript",
+  "profile": "browser-full",
+  "profileLabel": "Browser Full",
+  "upstream": {
+    "name": "Ghostscript",
+    "version": "10.08.0",
+    "ref": "gs10.08.0",
+    "commit": "4d175558193ad50d6fbc329fe28dbb48af626126",
+    "releaseSourceSha256": "c20492bc8ebb96c87fa2e52a0926e1cda8cde95d66145e018ac713fed5da38cf"
+  },
+  "toolchain": {
+    "name": "Emscripten",
+    "version": "6.0.7",
+    "commit": "4483d70a78098ed5d860dff2dc21f3025b2da2ee"
+  },
+  "runtime": {
+    "threads": false,
+    "simd": false,
+    "sharedArrayBuffer": false,
+    "worker": true,
+    "network": false,
+    "filesystem": "MEMFS",
+    "initialMemory": 134217728,
+    "maximumMemory": 2147483648,
+    "memoryGrowth": true
+  },
+  "build": {
+    "binaryLicense": "AGPL-3.0-or-later",
+    "arbitraryCli": true,
+    "driverGroups": ["BMP", "JPEG", "PNG", "PS", "TIFF"]
+  },
+  "files": {
+    "gs-core.js": {"bytes": 72060, "sha256": "34855213c0cf34288c193868fea847de7fd419719d8f7343083d261bf82d94ba"},
+    "gs-core.wasm": {"bytes": 16886951, "sha256": "13615a78029576ca8ebfebe1801a91441ee0485d944c89a8b16d409b649a214e"},
+    "gs-core.js.gz": {"bytes": 19348, "sha256": "13c33361a4867a3f7b23fab55810ee1fc6f6c7e59dd436fe5cdedbc2a5addd58"},
+    "gs-core.wasm.gz": {"bytes": 11636892, "sha256": "f3a12c0b4d2e891265a6ccea52f940bde60964cfdad45499cfe0e1dc00ff4b9e"}
+  }
+}

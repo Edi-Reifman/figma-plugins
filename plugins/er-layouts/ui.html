@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<style>
+:root{
+  --bg:var(--figma-color-bg,#fff); --bg2:var(--figma-color-bg-secondary,#f5f5f5); --bg3:var(--figma-color-bg-tertiary,#ececec);
+  --tx:var(--figma-color-text,#1e1e1e); --tx2:var(--figma-color-text-secondary,#757575); --bd:var(--figma-color-border,#e6e6e6);
+  --br:var(--figma-color-bg-brand,#0d99ff); --onbr:var(--figma-color-text-onbrand,#fff); --red:#ff3b3b;
+}
+*{box-sizing:border-box}
+body{margin:0;font:12px/1.4 Inter,system-ui,sans-serif;color:var(--tx);background:var(--bg);display:flex;flex-direction:column;height:100vh}
+button,input,select,textarea{font:inherit;color:inherit}
+.top{padding:10px 12px 0;border-bottom:1px solid var(--bd)}
+.tabs{display:flex;gap:2px;margin-top:8px}
+.tab{flex:1;padding:7px 2px;border:0;background:none;cursor:pointer;color:var(--tx2);border-bottom:2px solid transparent;font-weight:500;white-space:nowrap}
+.tab.on{color:var(--tx);border-color:var(--br)}
+.packs{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.packs .lbl{color:var(--tx2);margin-right:2px}
+.chip{border:1px solid var(--bd);border-radius:20px;padding:3px 9px;cursor:pointer;user-select:none;display:inline-flex;gap:5px;align-items:center;background:var(--bg)}
+.chip i{font-style:normal;color:var(--tx2);font-size:10px}
+.chip.on{background:var(--br);color:var(--onbr);border-color:var(--br)}
+.chip.on i{color:var(--onbr);opacity:.8}
+.chip b{font-weight:400;opacity:.6;margin-left:2px}
+.chip b:hover{opacity:1}
+.chip.add{border-style:dashed;color:var(--tx2)}
+.packin{display:flex;gap:5px;width:100%;margin-top:4px}
+.body{flex:1;overflow:auto;padding:10px 12px 14px}
+.hint{color:var(--tx2);font-size:11px;margin:2px 0 8px}
+.item{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:6px;cursor:pointer;border:1px solid transparent}
+.item:hover{background:var(--bg2)}
+.item.on{background:var(--bg2);border-color:var(--br)}
+.cb{width:16px;height:16px;border:1.5px solid var(--tx2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none}
+.item.on .cb{background:var(--br);border-color:var(--br);color:var(--onbr)}
+.th{flex:none}
+.meta{flex:1;min-width:0}
+.nm{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sz{color:var(--tx2);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{font-size:9px;background:var(--bg3);border-radius:3px;padding:1px 4px;margin-left:5px;font-weight:500;vertical-align:1px}
+.ico{border:0;background:none;cursor:pointer;color:var(--tx2);padding:3px 5px;border-radius:4px;opacity:0;flex:none}
+.item:hover .ico{opacity:1}
+.ico:hover{background:var(--bg3);color:var(--tx)}
+.sect{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--tx2);margin:12px 0 4px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.sect .link{text-transform:none;letter-spacing:0;font-weight:400}
+.card{border:1px solid var(--bd);border-radius:8px;padding:10px;margin-bottom:10px}
+.h{font-weight:600;margin-bottom:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.grid2{display:grid;grid-template-columns:2fr 1fr;gap:6px}
+.f label,.fl{display:block;color:var(--tx2);font-size:10px;margin-bottom:2px}
+input[type=text],input[type=number],select,textarea{width:100%;border:1px solid var(--bd);border-radius:5px;padding:5px 7px;background:var(--bg);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--br)}
+textarea{resize:vertical;font-family:ui-monospace,Menlo,monospace;font-size:11px}
+.zrow{display:grid;grid-template-columns:2.4fr 1fr 1fr 1fr 1fr 22px;gap:4px;margin-bottom:4px;align-items:center}
+.zrow input{padding:4px 5px}
+.zhead{display:grid;grid-template-columns:2.4fr 1fr 1fr 1fr 1fr 22px;gap:4px;color:var(--tx2);font-size:10px;margin-bottom:2px}
+.qz{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}
+.qz button{border:1px solid var(--bd);background:var(--bg);border-radius:4px;padding:2px 7px;cursor:pointer;font-size:11px}
+.qz button:hover{border-color:var(--br)}
+.prevbox{display:flex;gap:10px;align-items:center;margin:8px 0}
+.btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.pri,.sec{border-radius:6px;padding:7px 12px;cursor:pointer;border:1px solid var(--bd);background:var(--bg);font-weight:500}
+.pri{background:var(--br);color:var(--onbr);border-color:var(--br)}
+.pri:disabled{opacity:.45;cursor:default}
+.sec:hover{background:var(--bg2)}
+.link{border:0;background:none;color:var(--br);cursor:pointer;padding:0}
+.footer{border-top:1px solid var(--bd);padding:8px 12px 10px;background:var(--bg)}
+.frow{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.frow .grow{flex:1}
+.frow label{display:flex;align-items:center;gap:4px;color:var(--tx2)}
+.frow input[type=number]{width:62px;padding:3px 5px}
+.legend{display:flex;gap:10px;color:var(--tx2);font-size:10px;margin-top:6px;flex-wrap:wrap}
+.legend span::before{content:'';display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px;background:var(--c)}
+.err{color:var(--red);font-size:11px}
+.plist .item{cursor:default}
+.empty{color:var(--tx2);text-align:center;padding:14px 0}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="packs" id="packs"></div>
+  <div class="tabs" id="tabs"></div>
+</div>
+<div class="body" id="body"></div>
+<div class="footer">
+  <div class="frow">
+    <span class="grow">Выбрано: <b id="cnt">0</b> <button class="link" data-clear>сбросить</button></span>
+    <label><input type="checkbox" id="optLabels"> подписи</label>
+    <label>зазор <input type="number" id="optGap" min="0"></label>
+  </div>
+  <div class="frow"><input type="text" id="optTitle" placeholder="Название секции / задачи (необязательно)"></div>
+  <div class="frow">
+    <button class="sec" data-guides="0" title="Скрыть слои _guides (на странице или в выделении) перед экспортом">Скрыть разметку</button>
+    <button class="sec" data-guides="1">Показать</button>
+    <span class="grow"></span>
+    <button class="pri" id="genBtn" data-generate>Создать артборды</button>
+  </div>
+</div>
+
+<script>
+// ---------- ДАННЫЕ ----------
+// Слепые зоны — в % от размера макета (x, y, ширина, высота). Ориентировочные: интерфейсы площадок меняются.
+// Зоны сверены по скринам приложений (ноябрь 2026, iPhone):
+// WB, выдача: 👁 «скрыть» слева сверху, ♥ справа сверху, внизу слева до 3 акционных плашек, внизу справа кнопка корзины.
+var WB_ZONES = [
+  {name:'Скрыть 👁',x:0,y:0,w:20,h:13},
+  {name:'Избранное ♥',x:78,y:0,w:22,h:13},
+  {name:'Плашки акций (до 3 шт)',x:0,y:82,w:62,h:18},
+  {name:'Корзина',x:70,y:84,w:30,h:16}
+];
+// Ozon, страница товара: «назад» слева сверху, поиск/поделиться/♥ справа сверху, «Похожие» справа снизу.
+var OZON_ZONES = [
+  {name:'Назад',x:0,y:0,w:12,h:9},
+  {name:'Поиск · Поделиться · ♥',x:68,y:0,w:32,h:9},
+  {name:'Похожие',x:79,y:92,w:21,h:8}
+];
+var BUILTIN = [
+  // Маркетплейсы
+  {id:'mp_wb', group:'mp', name:'Wildberries 3:4', w:900, h:1200, unit:'px', safe:45, note:'зоны сверены по скринам выдачи',
+    zones:WB_ZONES},
+  {id:'mp_wb_hd', group:'mp', name:'Wildberries 3:4 HD', w:1440, h:1920, unit:'px', safe:72, note:'чёткий зум',
+    zones:WB_ZONES},
+  {id:'mp_ozon', group:'mp', name:'Ozon 3:4', w:1200, h:1600, unit:'px', safe:60, note:'зоны страницы товара по скрину',
+    zones:OZON_ZONES},
+  {id:'mp_ozon_fresh', group:'mp', name:'Ozon Fresh 1:1', w:1200, h:1200, unit:'px', safe:60, note:'продукты Fresh',
+    zones:[{name:'Бейджи Ozon',x:0,y:0,w:45,h:12},{name:'Избранное ♥',x:84,y:0,w:16,h:14}]},
+  {id:'mp_ym', group:'mp', name:'Яндекс Маркет 3:4', w:1200, h:1600, unit:'px', safe:60, note:'витрина 3:4',
+    zones:[{name:'Скидка / баллы',x:0,y:0,w:45,h:10},{name:'Избранное ♥',x:84,y:0,w:16,h:11},{name:'Ярлыки',x:0,y:90,w:45,h:10}]},
+  {id:'mp_ali', group:'mp', name:'AliExpress 1:1', w:1000, h:1000, unit:'px', safe:50, note:'мин. 800×800',
+    zones:[{name:'Choice / скидка',x:0,y:0,w:35,h:10},{name:'Избранное',x:86,y:0,w:14,h:12}]},
+
+  // Реклама и соцсети
+  {id:'ad_sq', group:'ads', name:'Квадрат 1:1', w:1080, h:1080, unit:'px', note:'Insta / VK / Директ / TG'},
+  {id:'ad_45', group:'ads', name:'Пост 4:5', w:1080, h:1350, unit:'px', note:'лента Insta / VK'},
+  {id:'ad_stories', group:'ads', name:'Stories 9:16', w:1080, h:1920, unit:'px', note:'Insta / VK / TG',
+    zones:[{name:'Профиль и шкала',x:0,y:0,w:100,h:13},{name:'Ответ / ссылка',x:0,y:82,w:100,h:18}]},
+  {id:'ad_reels', group:'ads', name:'Reels / VK Клипы 9:16', w:1080, h:1920, unit:'px',
+    zones:[{name:'Шапка',x:0,y:0,w:100,h:10},{name:'Подпись и звук',x:0,y:76,w:100,h:24},{name:'Кнопки',x:86,y:45,w:14,h:31}]},
+  {id:'ad_tiktok', group:'ads', name:'TikTok 9:16', w:1080, h:1920, unit:'px',
+    zones:[{name:'Шапка',x:0,y:0,w:100,h:8},{name:'Описание',x:0,y:75,w:100,h:25},{name:'Кнопки',x:85,y:38,w:15,h:37}]},
+  {id:'ad_169', group:'ads', name:'Горизонт 16:9', w:1920, h:1080, unit:'px', note:'Директ / VK / YouTube / TG'},
+  {id:'ad_yt', group:'ads', name:'YouTube превью', w:1280, h:720, unit:'px', zones:[{name:'Таймкод',x:84,y:87,w:16,h:13}]},
+  {id:'ad_ytcover', group:'ads', name:'YouTube обложка канала', w:2560, h:1440, unit:'px', note:'безопасно 1546×423 в центре',
+    zones:[{name:'Видно только на ТВ',x:0,y:0,w:100,h:35.3},{name:'Видно только на ТВ',x:0,y:64.7,w:100,h:35.3},{name:'Только ПК/ТВ',x:0,y:35.3,w:19.8,h:29.4},{name:'Только ПК/ТВ',x:80.2,y:35.3,w:19.8,h:29.4}]},
+  {id:'ad_ozon_native', group:'ads', name:'Ozon нативный баннер 3:4', w:768, h:1024, unit:'px', note:'до 120 КБ'},
+  {id:'ad_240x400', group:'ads', name:'Баннер 240×400', w:240, h:400, unit:'px', note:'медийка'},
+  {id:'ad_300x250', group:'ads', name:'Баннер 300×250', w:300, h:250, unit:'px', note:'медийка'},
+  {id:'ad_300x600', group:'ads', name:'Баннер 300×600', w:300, h:600, unit:'px', note:'медийка'},
+  {id:'ad_336x280', group:'ads', name:'Баннер 336×280', w:336, h:280, unit:'px', note:'медийка'},
+  {id:'ad_160x600', group:'ads', name:'Баннер 160×600', w:160, h:600, unit:'px', note:'небоскрёб'},
+  {id:'ad_728x90', group:'ads', name:'Баннер 728×90', w:728, h:90, unit:'px', note:'перетяжка'},
+  {id:'ad_970x250', group:'ads', name:'Баннер 970×250', w:970, h:250, unit:'px', note:'билборд'},
+  {id:'ad_320x50', group:'ads', name:'Баннер 320×50', w:320, h:50, unit:'px', note:'мобильный'},
+  {id:'ad_320x100', group:'ads', name:'Баннер 320×100', w:320, h:100, unit:'px', note:'мобильный'},
+
+  // Печать (мм)
+  {id:'pr_a6', group:'print', name:'Листовка A6', w:105, h:148, unit:'mm', bleed:3, safe:5},
+  {id:'pr_a5', group:'print', name:'Листовка A5', w:148, h:210, unit:'mm', bleed:3, safe:5},
+  {id:'pr_a4', group:'print', name:'A4', w:210, h:297, unit:'mm', bleed:3, safe:5},
+  {id:'pr_a3', group:'print', name:'Афиша A3', w:297, h:420, unit:'mm', bleed:3, safe:7},
+  {id:'pr_a2', group:'print', name:'Плакат A2', w:420, h:594, unit:'mm', bleed:3, safe:10},
+  {id:'pr_a1', group:'print', name:'Плакат A1', w:594, h:841, unit:'mm', bleed:5, safe:15},
+  {id:'pr_euro', group:'print', name:'Евро-флаер', w:99, h:210, unit:'mm', bleed:3, safe:5},
+  {id:'pr_card', group:'print', name:'Визитка', w:90, h:50, unit:'mm', bleed:2, safe:4},
+  {id:'pr_rollup', group:'print', name:'Ролл-ап', w:850, h:2000, unit:'mm', bleed:5, safe:30, note:'низ уходит в кассету',
+    zones:[{name:'Уходит в основание',x:0,y:92.5,w:100,h:7.5},{name:'Планка',x:0,y:0,w:100,h:2}]},
+  {id:'pr_presswall', group:'print', name:'Пресс-волл 3×2 м', w:3000, h:2000, unit:'mm', bleed:30, safe:50},
+  {id:'pr_banner', group:'print', name:'Баннер 6×3 м (люверсы)', w:6000, h:3000, unit:'mm', bleed:50, safe:60, note:'по краю люверсы'}
+];
+
+var BUILTIN_PACKS = [
+  {id:'pk_mp', name:'Все маркетплейсы', ids:['mp_wb','mp_ozon','mp_ym','mp_ali']},
+  {id:'pk_social', name:'Соцсети', ids:['ad_sq','ad_45','ad_stories','ad_reels']},
+  {id:'pk_direct', name:'Директ + VK Реклама', ids:['ad_sq','ad_45','ad_169','ad_stories','ad_240x400','ad_300x250','ad_300x600','ad_728x90']},
+  {id:'pk_iab', name:'Медийные баннеры', ids:['ad_240x400','ad_300x250','ad_300x600','ad_336x280','ad_160x600','ad_728x90','ad_970x250','ad_320x50','ad_320x100']},
+  {id:'pk_event', name:'Афиша события', ids:['ad_stories','ad_sq','ad_45','ad_169','pr_a3','pr_a2']},
+  {id:'pk_print', name:'Полиграфия', ids:['pr_a6','pr_a5','pr_a4','pr_euro','pr_card']}
+];
+
+var TABS = [['mp','Маркетплейсы'],['ads','Реклама'],['print','Печать'],['list','Списком'],['mine','Свои']];
+var GROUPS = {mp:'Маркетплейсы', ads:'Реклама', print:'Печать', other:'Другое'};
+
+// ---------- СОСТОЯНИЕ ----------
+var custom = [], userPacks = [], selected = new Set(), tab = 'mp', addingPack = false, ioText = '';
+var settings = {dpi:72, labels:true, gap:160, title:'', listUnit:'px', listBleed:0, listSafe:0, listText:''};
+var form = emptyForm();
+
+function emptyForm(){ return {id:null, name:'', group:'mp', w:1080, h:1080, unit:'px', bleed:0, safe:0, zones:[]}; }
+function all(){ return BUILTIN.concat(custom); }
+function byId(id){ var a = all(); for (var i=0;i<a.length;i++) if (a[i].id===id) return a[i]; return null; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function num(v, d){ var n = parseFloat(String(v).replace(',', '.')); return isFinite(n) ? n : (d||0); }
+function fmt(n){ return String(Math.round(n*100)/100).replace('.', ','); }
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+function post(m){ parent.postMessage({pluginMessage:m}, '*'); }
+function notify(t, err){ post({type:'notify', text:t, error:!!err}); }
+function persist(){ post({type:'save', custom:custom, packs:userPacks, settings:settings}); }
+
+function sizeText(p){
+  var u = p.unit==='mm' ? ' мм' : '';
+  var s = fmt(p.w)+'×'+fmt(p.h)+u;
+  if (p.bleed) s += ' · вылет '+fmt(p.bleed)+u;
+  if (p.safe) s += ' · поле '+fmt(p.safe)+u;
+  return s;
+}
+
+function thumb(p, S){
+  S = S || 40;
+  var r = p.w/p.h, w = S, h = S;
+  if (r > 1) h = S/r; else w = S*r;
+  w = Math.max(w, 3); h = Math.max(h, 3);
+  var x = (S-w)/2, y = (S-h)/2;
+  var z = (p.zones||[]).map(function(zn){
+    return '<rect x="'+(x+zn.x/100*w)+'" y="'+(y+zn.y/100*h)+'" width="'+Math.max(0,zn.w/100*w)+'" height="'+Math.max(0,zn.h/100*h)+'" fill="#ff3b3b" fill-opacity=".5"/>';
+  }).join('');
+  var sf = '';
+  if (p.safe > 0 && p.safe*2 < Math.min(p.w,p.h)) {
+    var sx = p.safe/p.w*w, sy = p.safe/p.h*h;
+    sf = '<rect x="'+(x+sx)+'" y="'+(y+sy)+'" width="'+(w-2*sx)+'" height="'+(h-2*sy)+'" fill="none" stroke="#e600bf" stroke-width="'+(S>60?1.2:.8)+'" stroke-dasharray="2 1.5"/>';
+  }
+  var bl = p.bleed ? ' stroke="#ff8c00" stroke-width="1.4"' : ' stroke="#999" stroke-width=".8"';
+  return '<svg class="th" width="'+S+'" height="'+S+'" viewBox="0 0 '+S+' '+S+'"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#fff"'+bl+'/>'+z+sf+'</svg>';
+}
+
+function itemRow(p, opts){
+  opts = opts || {};
+  var on = selected.has(p.id);
+  return '<div class="item '+(on?'on':'')+'" data-toggle="'+p.id+'">'+
+    '<span class="cb">'+(on?'✓':'')+'</span>'+thumb(p)+
+    '<div class="meta"><div class="nm">'+esc(p.name)+(p.custom?'<span class="tag">свой</span>':'')+(opts.showGroup?'<span class="tag">'+esc(GROUPS[p.group]||'')+'</span>':'')+'</div>'+
+    '<div class="sz">'+sizeText(p)+(p.note?' · '+esc(p.note):'')+'</div></div>'+
+    '<button class="ico" data-edit="'+p.id+'" title="'+(p.custom?'Редактировать':'Скопировать в свои и изменить')+'">✎</button>'+
+    (p.custom?'<button class="ico" data-del="'+p.id+'" title="Удалить пресет">✕</button>':'')+
+  '</div>';
+}
+
+// ---------- ПАРСЕР СПИСКА ----------
+// Понимает строки вида:
+//   1080x1080
+//   Баннер VK 1200×628
+//   Афиша 297х420 мм +3          (вылет 3 мм)
+//   Ролл-ап 85x200 см вылет 5 поле 30
+//   1080x1920, 1080x1350, 300x250 (несколько через запятую)
+var NUM = '(\\d+(?:[.,]\\d+)?)';
+var SIZE_RE = new RegExp(NUM+'\\s*[xх×*Xх]\\s*'+NUM, 'g');
+
+function parseList(txt){
+  var out = [], errors = [];
+  var lines = String(txt||'').split(/[\n;]+/);
+  lines.forEach(function(raw, li){
+    var line = raw.trim();
+    if (!line || /^(#|\/\/)/.test(line)) return;
+    var sizes = [], m;
+    SIZE_RE.lastIndex = 0;
+    while ((m = SIZE_RE.exec(line))) sizes.push({w:num(m[1]), h:num(m[2]), idx:m.index, len:m[0].length});
+    if (!sizes.length){ errors.push('Строка '+(li+1)+': не найден размер «'+line+'»'); return; }
+
+    var lower = line.toLowerCase();
+    var unit = settings.listUnit, mult = 1;
+    if (/(^|[^а-яa-z])(мм|mm)([^а-яa-z]|$)/.test(lower)) unit = 'mm';
+    else if (/(^|[^а-яa-z])(см|cm)([^а-яa-z]|$)/.test(lower)) { unit = 'mm'; mult = 10; }
+    else if (/(^|[^а-яa-z])(м|m)([^а-яa-z]|$)/.test(lower) && !/px|пикс/.test(lower)) { unit = 'mm'; mult = 1000; }
+    else if (/px|пикс/.test(lower)) unit = 'px';
+
+    var bm = lower.match(/(?:вылет|bleed|\+)\s*(\d+(?:[.,]\d+)?)/);
+    var sm = lower.match(/(?:поле|поля|безоп\S*|safe)\s*(\d+(?:[.,]\d+)?)/);
+    var bleed = bm ? num(bm[1]) : num(settings.listBleed);
+    var safe = sm ? num(sm[1]) : num(settings.listSafe);
+    if (unit === 'px' && !bm) bleed = settings.listUnit === 'px' ? num(settings.listBleed) : 0;
+    // вылет/поле в мм, если размер в см/м — считаем, что вылет указан в мм
+    // название = строка без размеров и служебных слов
+    var name = line;
+    for (var i = sizes.length-1; i >= 0; i--) name = name.slice(0, sizes[i].idx) + ' ' + name.slice(sizes[i].idx + sizes[i].len);
+    name = name.replace(/(?:вылет|bleed|\+)\s*\d+(?:[.,]\d+)?/gi, ' ')
+               .replace(/(?:поле|поля|безоп\S*|safe)\s*\d+(?:[.,]\d+)?/gi, ' ')
+               .replace(/(^|\s)(мм|mm|см|cm|м|m|px|пикс\S*)(?=\s|$|[,.;:)])/gi, ' ')
+               .replace(/[,;:—–\-|]+\s*$/,'').replace(/^\s*[,;:—–\-|]+/,'')
+               .replace(/\s{2,}/g,' ').trim();
+    sizes.forEach(function(s, si){
+      var w = s.w*mult, h = s.h*mult;
+      if (!(w>0 && h>0)) { errors.push('Строка '+(li+1)+': неверный размер'); return; }
+      var label = fmt(w)+'×'+fmt(h)+(unit==='mm'?' мм':'');
+      var nm = name ? (sizes.length>1 ? name+' '+label : name) : label;
+      out.push({id:'l_'+li+'_'+si, group: unit==='mm'?'print':'other', name:nm, w:w, h:h, unit:unit, bleed:bleed, safe:safe, zones:[]});
+    });
+  });
+  return {items:out, errors:errors};
+}
+
+// ---------- РЕНДЕР ----------
+function render(){ renderPacks(); renderTabs(); renderBody(); renderFooter(); }
+
+function renderTabs(){
+  document.getElementById('tabs').innerHTML = TABS.map(function(t){
+    return '<button class="tab '+(tab===t[0]?'on':'')+'" data-tab="'+t[0]+'">'+t[1]+'</button>';
+  }).join('');
+}
+
+function packList(){ return BUILTIN_PACKS.concat(userPacks.map(function(p){ var c = clone(p); c.user = true; return c; })); }
+
+function renderPacks(){
+  var html = '<span class="lbl">Пакеты:</span>' + packList().map(function(pk){
+    var ids = pk.ids.filter(byId);
+    var full = ids.length && ids.every(function(id){ return selected.has(id); });
+    return '<span class="chip '+(full?'on':'')+'" data-pack="'+pk.id+'" title="Отметить / снять все из пакета">'+esc(pk.name)+' <i>'+ids.length+'</i>'+(pk.user?'<b data-delpack="'+pk.id+'" title="Удалить пакет">×</b>':'')+'</span>';
+  }).join('') + '<span class="chip add" data-addpack>+ сохранить выбор</span>';
+  if (addingPack) html += '<div class="packin"><input type="text" id="packName" placeholder="Название пакета, напр. «Промо клиента N»"><button class="pri" data-savepack>OK</button><button class="sec" data-cancelpack>✕</button></div>';
+  document.getElementById('packs').innerHTML = html;
+  if (addingPack) setTimeout(function(){ var i = document.getElementById('packName'); if (i) i.focus(); }, 0);
+}
+
+function renderBody(){
+  var b = document.getElementById('body'), h = '';
+  if (tab === 'mp' || tab === 'ads' || tab === 'print'){
+    if (tab === 'mp') h += '<div class="hint">Слепые зоны — где площадка кладёт свои плашки, сердечко и скидки. Значения ориентировочные: нажми ✎, поправь и сохрани как свой пресет.</div>';
+    if (tab === 'ads') h += '<div class="hint">Отметь нужные форматы или выбери пакет сверху. Красным — зоны интерфейса (кнопки, подписи), куда не стоит ставить текст.</div>';
+    if (tab === 'print') h += dpiCard();
+    var list = BUILTIN.filter(function(p){ return p.group === tab; });
+    var mine = custom.filter(function(p){ return p.group === tab; });
+    h += '<div class="sect">Готовые <button class="link" data-selgroup="'+tab+'">отметить все</button></div>' + list.map(function(p){ return itemRow(p); }).join('');
+    if (mine.length) h += '<div class="sect">Мои</div>' + mine.map(function(p){ return itemRow(p); }).join('');
+  } else if (tab === 'list') {
+    h += listTab();
+  } else {
+    h += formCard();
+    h += '<div class="sect">Сохранённые пресеты</div>';
+    h += custom.length ? custom.map(function(p){ return itemRow(p, {showGroup:true}); }).join('') : '<div class="empty">Пока пусто. Заполни форму выше и нажми «Сохранить пресет».</div>';
+    h += ioCard();
+  }
+  b.innerHTML = h;
+}
+
+function dpiCard(){
+  var o = [[72,'72 — 1 px = 1 pt, PDF в натуральную величину'],[150,'150 dpi — широкоформат, растровый экспорт'],[300,'300 dpi — офсет, растровый экспорт']];
+  return '<div class="card"><div class="h">Масштаб мм → px</div><select id="dpi">'+o.map(function(x){ return '<option value="'+x[0]+'" '+(settings.dpi==x[0]?'selected':'')+'>'+x[1]+'</option>'; }).join('')+'</select>'+
+    '<div class="hint" style="margin:6px 0 0">Для печати рекомендую 72: экспорт в PDF из Figma даёт точный физический размер, вектор остаётся вектором. Для больших форматов (баннеры, пресс-воллы) — только 72.</div>'+
+    '<div class="legend"><span style="--c:#ff8c00">вылет</span><span style="--c:#00b8ff">линия реза</span><span style="--c:#e600bf">безопасное поле</span><span style="--c:#ff3b3b">слепая зона</span></div></div>';
+}
+
+function listTab(){
+  var parsed = parseList(settings.listText);
+  var h = '<div class="card"><div class="h">Размеры списком</div>'+
+    '<textarea id="listText" rows="7" placeholder="Каждый размер с новой строки (или через запятую):&#10;1080x1080&#10;Баннер VK 1200x628&#10;Stories 1080×1920&#10;Афиша 297x420 мм +3&#10;Ролл-ап 85x200 см вылет 5 поле 30&#10;300x250, 728x90, 240x400">'+esc(settings.listText)+'</textarea>'+
+    '<div class="grid" style="margin-top:6px">'+
+      '<div class="f"><label>Единицы по умолчанию</label><select id="listUnit"><option value="px" '+(settings.listUnit==='px'?'selected':'')+'>px</option><option value="mm" '+(settings.listUnit==='mm'?'selected':'')+'>мм</option></select></div>'+
+      '<div class="f"><label>Вылет по умолч.</label><input type="number" id="listBleed" min="0" value="'+num(settings.listBleed)+'"></div>'+
+      '<div class="f"><label>Безоп. поле по умолч.</label><input type="number" id="listSafe" min="0" value="'+num(settings.listSafe)+'"></div>'+
+    '</div>'+
+    '<div class="hint" style="margin:6px 0 0">Разделитель: x, х, × или *. Можно писать «мм», «см», «м», «+3» или «вылет 3», «поле 10». Текст в строке станет названием артборда. Строки с # пропускаются.</div>'+
+    '<div id="listParsed">'+listParsedHtml(parsed)+'</div>'+
+  '</div>';
+  return h;
+}
+
+function listParsedHtml(parsed){
+  var h = '';
+  if (parsed.errors.length) h += '<div class="err" style="margin-top:6px">'+parsed.errors.map(esc).join('<br>')+'</div>';
+  if (parsed.items.length){
+    h += '<div class="sect">Распознано: '+parsed.items.length+'</div><div class="plist">'+parsed.items.map(function(p){
+      return '<div class="item">'+thumb(p)+'<div class="meta"><div class="nm">'+esc(p.name)+'</div><div class="sz">'+sizeText(p)+'</div></div></div>';
+    }).join('')+'</div>'+
+    '<div class="btns"><button class="pri" data-listgen>Создать из списка ('+parsed.items.length+')</button>'+
+    '<button class="sec" data-listsave title="Каждый размер станет своим пресетом, весь список — пакетом">Сохранить как пакет…</button></div>'+
+    '<div class="packin" id="listPackRow" style="display:none"><input type="text" id="listPackName" placeholder="Название пакета"><button class="pri" data-listsaveok>OK</button></div>';
+  }
+  return h;
+}
+
+function formCard(){
+  var f = form;
+  return '<div class="card"><div class="h">'+(f.id?'Редактирование пресета':'Новый пресет / разовый размер')+'</div>'+
+    '<div class="grid2"><div class="f"><label>Название</label><input type="text" data-f="name" value="'+esc(f.name)+'" placeholder="напр. Мегамаркет 3:4"></div>'+
+    '<div class="f"><label>Раздел</label><select data-f="group">'+Object.keys(GROUPS).map(function(k){ return '<option value="'+k+'" '+(f.group===k?'selected':'')+'>'+GROUPS[k]+'</option>'; }).join('')+'</select></div></div>'+
+    '<div class="grid" style="margin-top:6px">'+
+      '<div class="f"><label>Ширина</label><input type="number" data-f="w" value="'+f.w+'" min="1"></div>'+
+      '<div class="f"><label>Высота</label><input type="number" data-f="h" value="'+f.h+'" min="1"></div>'+
+      '<div class="f"><label>Единицы</label><select data-f="unit"><option value="px" '+(f.unit==='px'?'selected':'')+'>px</option><option value="mm" '+(f.unit==='mm'?'selected':'')+'>мм</option></select></div>'+
+      '<div class="f"><label>Вылет (под обрез)</label><input type="number" data-f="bleed" value="'+f.bleed+'" min="0"></div>'+
+      '<div class="f"><label>Безопасное поле</label><input type="number" data-f="safe" value="'+f.safe+'" min="0"></div>'+
+      '<div class="f"><label>&nbsp;</label><button class="sec" style="width:100%;padding:5px" data-swap title="Поменять ширину и высоту">⇄ поворот</button></div>'+
+    '</div>'+
+    '<div class="prevbox"><span id="formPrev">'+thumb(f, 96)+'</span><div class="hint" style="margin:0">Слепые зоны задаются в % от макета: X/Y — левый верхний угол, Ш/В — размер. Быстрые кнопки ниже добавят типовые зоны.</div></div>'+
+    '<div class="fl">Слепые зоны</div>'+
+    '<div class="qz">'+
+      '<button data-qz="top">+ верх</button><button data-qz="bottom">+ низ</button><button data-qz="tl">+ ↖ угол</button><button data-qz="tr">+ ↗ угол</button><button data-qz="bl">+ ↙ угол</button><button data-qz="br">+ ↘ угол</button><button data-qz="left">+ лево</button><button data-qz="right">+ право</button><button data-qz="btnr">+ кнопки справа</button><button data-qz="custom">+ своя</button>'+
+    '</div>'+
+    (f.zones.length ? '<div class="zhead"><span>Название</span><span>X %</span><span>Y %</span><span>Ш %</span><span>В %</span><span></span></div>' : '')+
+    f.zones.map(function(z, i){
+      return '<div class="zrow"><input type="text" data-z="'+i+'" data-k="name" value="'+esc(z.name)+'">'+
+        ['x','y','w','h'].map(function(k){ return '<input type="number" data-z="'+i+'" data-k="'+k+'" value="'+z[k]+'" min="0" max="100">'; }).join('')+
+        '<button class="ico" style="opacity:1" data-zdel="'+i+'">✕</button></div>';
+    }).join('')+
+    '<div class="btns"><button class="pri" data-formgen>Создать сейчас</button><button class="sec" data-formsave>'+(f.id?'Сохранить изменения':'Сохранить пресет')+'</button><button class="sec" data-formreset>Очистить</button></div>'+
+  '</div>';
+}
+
+function ioCard(){
+  return '<details class="card" style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Экспорт / импорт пресетов</summary>'+
+    '<div class="hint" style="margin-top:6px">Пресеты хранятся локально в Figma на этом компьютере. Скопируй JSON для бэкапа или переноса на другой компьютер / коллеге.</div>'+
+    '<textarea id="io" rows="6" placeholder="JSON">'+esc(ioText)+'</textarea>'+
+    '<div class="btns"><button class="sec" data-export>Экспорт</button><button class="sec" data-import>Импорт из поля</button></div></details>';
+}
+
+function renderFooter(){
+  var n = selectedItems().length;
+  document.getElementById('cnt').textContent = n;
+  var g = document.getElementById('genBtn');
+  g.disabled = !n;
+  g.textContent = n ? 'Создать артборды ('+n+')' : 'Создать артборды';
+  document.getElementById('optLabels').checked = settings.labels !== false;
+  document.getElementById('optGap').value = settings.gap;
+  document.getElementById('optTitle').value = settings.title || '';
+}
+
+function selectedItems(){ return all().filter(function(p){ return selected.has(p.id); }); }
+
+function options(){ return {dpi:num(settings.dpi,72), labels:settings.labels !== false, gap:num(settings.gap,160), title:settings.title||''}; }
+
+function generate(items){
+  if (!items.length) return notify('Ничего не выбрано');
+  post({type:'generate', items:clone(items), options:options()});
+}
+
+function formPreset(){
+  return {id:form.id, group:form.group, name:(form.name||'').trim() || (fmt(form.w)+'×'+fmt(form.h)), w:num(form.w), h:num(form.h), unit:form.unit, bleed:num(form.bleed), safe:num(form.safe),
+    zones:form.zones.map(function(z){ return {name:z.name, x:num(z.x), y:num(z.y), w:num(z.w), h:num(z.h)}; })};
+}
+
+var QZ = {
+  top:{name:'Верх',x:0,y:0,w:100,h:10}, bottom:{name:'Низ',x:0,y:90,w:100,h:10},
+  tl:{name:'Левый верх',x:0,y:0,w:30,h:12}, tr:{name:'Правый верх',x:80,y:0,w:20,h:12},
+  bl:{name:'Левый низ',x:0,y:88,w:30,h:12}, br:{name:'Правый низ',x:70,y:88,w:30,h:12},
+  left:{name:'Лево',x:0,y:0,w:10,h:100}, right:{name:'Право',x:90,y:0,w:10,h:100},
+  btnr:{name:'Кнопки справа',x:86,y:40,w:14,h:35}, custom:{name:'Зона',x:40,y:40,w:20,h:20}
+};
+
+// ---------- СОБЫТИЯ ----------
+document.addEventListener('click', function(e){
+  var t = e.target, el;
+  if ((el = t.closest('[data-tab]'))) { tab = el.dataset.tab; addingPack = false; return render(); }
+  if ((el = t.closest('[data-delpack]'))) {
+    userPacks = userPacks.filter(function(p){ return p.id !== el.dataset.delpack; }); persist(); return render();
+  }
+  if ((el = t.closest('[data-pack]'))) {
+    var pk = packList().filter(function(p){ return p.id === el.dataset.pack; })[0];
+    if (!pk) return;
+    var ids = pk.ids.filter(byId);
+    var full = ids.every(function(id){ return selected.has(id); });
+    ids.forEach(function(id){ full ? selected.delete(id) : selected.add(id); });
+    return render();
+  }
+  if (t.closest('[data-addpack]')) {
+    if (!selectedItems().length) return notify('Сначала отметь форматы, которые войдут в пакет');
+    addingPack = true; return renderPacks();
+  }
+  if (t.closest('[data-cancelpack]')) { addingPack = false; return renderPacks(); }
+  if (t.closest('[data-savepack]')) return savePack();
+  if ((el = t.closest('[data-edit]'))) {
+    e.stopPropagation();
+    var p = byId(el.dataset.edit); if (!p) return;
+    form = clone(p);
+    if (!p.custom) { form.id = null; form.name = p.name + ' (моё)'; }
+    form.zones = form.zones || []; form.bleed = form.bleed || 0; form.safe = form.safe || 0;
+    tab = 'mine'; render(); document.getElementById('body').scrollTop = 0; return;
+  }
+  if ((el = t.closest('[data-del]'))) {
+    e.stopPropagation();
+    custom = custom.filter(function(p){ return p.id !== el.dataset.del; });
+    selected.delete(el.dataset.del);
+    if (form.id === el.dataset.del) form = emptyForm();
+    persist(); return render();
+  }
+  if ((el = t.closest('[data-toggle]'))) {
+    var id = el.dataset.toggle; selected.has(id) ? selected.delete(id) : selected.add(id);
+    renderBody(); renderPacks(); renderFooter(); return;
+  }
+  if ((el = t.closest('[data-selgroup]'))) {
+    var g = el.dataset.selgroup;
+    var ids2 = all().filter(function(p){ return p.group === g; }).map(function(p){ return p.id; });
+    var allOn = ids2.every(function(id){ return selected.has(id); });
+    ids2.forEach(function(id){ allOn ? selected.delete(id) : selected.add(id); });
+    return render();
+  }
+  if (t.closest('[data-clear]')) { selected.clear(); return render(); }
+  if ((el = t.closest('[data-guides]'))) return post({type:'guides', visible: el.dataset.guides === '1'});
+  if (t.closest('[data-generate]')) return generate(selectedItems());
+
+  // список
+  if (t.closest('[data-listgen]')) return generate(parseList(settings.listText).items);
+  if (t.closest('[data-listsave]')) { var r = document.getElementById('listPackRow'); r.style.display = 'flex'; document.getElementById('listPackName').focus(); return; }
+  if (t.closest('[data-listsaveok]')) return saveListAsPack();
+
+  // форма
+  if ((el = t.closest('[data-qz]'))) { form.zones.push(clone(QZ[el.dataset.qz])); return renderBody(); }
+  if ((el = t.closest('[data-zdel]'))) { form.zones.splice(+el.dataset.zdel, 1); return renderBody(); }
+  if (t.closest('[data-swap]')) { var w = form.w; form.w = form.h; form.h = w; form.zones = form.zones.map(function(z){ return {name:z.name, x:z.y, y:z.x, w:z.h, h:z.w}; }); return renderBody(); }
+  if (t.closest('[data-formreset]')) { form = emptyForm(); return renderBody(); }
+  if (t.closest('[data-formgen]')) { var fp = formPreset(); if (!(fp.w>0 && fp.h>0)) return notify('Укажи ширину и высоту', true); return generate([fp]); }
+  if (t.closest('[data-formsave]')) return saveForm();
+
+  // экспорт/импорт
+  if (t.closest('[data-export]')) {
+    ioText = JSON.stringify({custom:custom, packs:userPacks}, null, 2);
+    var io = document.getElementById('io'); io.value = ioText; io.select();
+    try { document.execCommand('copy'); notify('JSON скопирован в буфер'); } catch (err) {}
+    return;
+  }
+  if (t.closest('[data-import]')) {
+    try {
+      var data = JSON.parse(document.getElementById('io').value);
+      var inC = Array.isArray(data) ? data : (data.custom || []);
+      var inP = data.packs || [];
+      inC.forEach(function(p){ p.custom = true; custom = custom.filter(function(c){ return c.id !== p.id; }); custom.push(p); });
+      inP.forEach(function(p){ userPacks = userPacks.filter(function(c){ return c.id !== p.id; }); userPacks.push(p); });
+      persist(); render(); notify('Импортировано: пресетов '+inC.length+', пакетов '+inP.length);
+    } catch (err) { notify('Не получилось прочитать JSON', true); }
+  }
+});
+
+document.addEventListener('input', function(e){
+  var t = e.target;
+  if (t.dataset.f) {
+    form[t.dataset.f] = (t.dataset.f === 'name' || t.dataset.f === 'group' || t.dataset.f === 'unit') ? t.value : num(t.value);
+    var pv = document.getElementById('formPrev'); if (pv) pv.innerHTML = thumb(formPreset(), 96);
+  } else if (t.dataset.z !== undefined) {
+    var z = form.zones[+t.dataset.z]; z[t.dataset.k] = t.dataset.k === 'name' ? t.value : num(t.value);
+    var pv2 = document.getElementById('formPrev'); if (pv2) pv2.innerHTML = thumb(formPreset(), 96);
+  } else if (t.id === 'listText' || t.id === 'listBleed' || t.id === 'listSafe') {
+    settings[t.id] = t.id === 'listText' ? t.value : num(t.value);
+    document.getElementById('listParsed').innerHTML = listParsedHtml(parseList(settings.listText));
+    persistSoon();
+  } else if (t.id === 'optGap') { settings.gap = num(t.value, 160); persistSoon(); }
+  else if (t.id === 'optTitle') { settings.title = t.value; persistSoon(); }
+});
+
+document.addEventListener('change', function(e){
+  var t = e.target;
+  if (t.id === 'dpi') { settings.dpi = num(t.value, 72); persist(); }
+  else if (t.id === 'optLabels') { settings.labels = t.checked; persist(); }
+  else if (t.id === 'listUnit') { settings.listUnit = t.value; persist(); document.getElementById('listParsed').innerHTML = listParsedHtml(parseList(settings.listText)); }
+  else if (t.dataset.f === 'unit' || t.dataset.f === 'group') { form[t.dataset.f] = t.value; }
+});
+
+document.addEventListener('keydown', function(e){
+  if (e.key !== 'Enter') return;
+  if (e.target.id === 'packName') savePack();
+  if (e.target.id === 'listPackName') saveListAsPack();
+});
+
+var persistTimer = null;
+function persistSoon(){ clearTimeout(persistTimer); persistTimer = setTimeout(persist, 400); }
+
+function savePack(){
+  var i = document.getElementById('packName'); var name = i ? i.value.trim() : '';
+  if (!name) return notify('Введи название пакета');
+  var ids = selectedItems().map(function(p){ return p.id; });
+  userPacks.push({id:'up_'+Date.now(), name:name, ids:ids});
+  addingPack = false; persist(); render(); notify('Пакет «'+name+'» сохранён');
+}
+
+function saveForm(){
+  var p = formPreset();
+  if (!(p.w > 0 && p.h > 0)) return notify('Укажи ширину и высоту', true);
+  if (!(form.name||'').trim()) return notify('Дай пресету название', true);
+  p.custom = true;
+  if (p.id) custom = custom.map(function(c){ return c.id === p.id ? p : c; });
+  else { p.id = 'c_' + Date.now(); custom.push(p); }
+  form = clone(p);
+  persist(); render(); notify('Пресет «'+p.name+'» сохранён в раздел «'+(GROUPS[p.group])+'»');
+}
+
+function saveListAsPack(){
+  var name = (document.getElementById('listPackName').value || '').trim();
+  if (!name) return notify('Введи название пакета');
+  var items = parseList(settings.listText).items;
+  var stamp = Date.now(), ids = [];
+  items.forEach(function(it, i){
+    var p = clone(it); p.id = 'c_' + stamp + '_' + i; p.custom = true; custom.push(p); ids.push(p.id);
+  });
+  userPacks.push({id:'up_'+stamp, name:name, ids:ids});
+  persist(); render(); notify('Пакет «'+name+'» сохранён: '+ids.length+' размеров');
+}
+
+window.onmessage = function(e){
+  var m = e.data && e.data.pluginMessage; if (!m) return;
+  if (m.type === 'data') {
+    custom = (m.custom || []).map(function(p){ p.custom = true; return p; });
+    userPacks = m.packs || [];
+    for (var k in (m.settings||{})) settings[k] = m.settings[k];
+    render();
+  }
+};
+
+render();
+post({type:'init'});
+</script>
+</body>
+</html>
