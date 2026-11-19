@@ -1,0 +1,55 @@
+<!-- ER-Design · 08 Подвал + скрипт кнопок (держать последним) -->
+<div class="erp">
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="w">
+      <div class="foot-cta">
+        <h2>Нужен дизайн, а не плагин? <a href="https://er-design.space">Смотрите портфолио</a></h2>
+        <div class="ctas" style="margin-top:0">
+          <a class="btn sec" href="https://paypal.me/edireifman" target="_blank" rel="noopener">Поддержать разработку</a>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <span>© ER-Design · Эдуард Рейфман</span>
+        <a href="mailto:info@er-design.space">info@er-design.space</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  /* ====== ССЫЛКИ: вставьте адреса между кавычками ======
+     zip       — прямая ссылка на архив (Яндекс Диск, Google Drive, свой сервер)
+     community — страница плагина в Figma Community (после публикации)
+     Пустая строка = кнопка показывается неактивной с подписью «скоро». */
+  var LINKS = {
+    'er-layouts':   { zip: 'https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/ER-Layouts-1.0.zip', community: '' },
+    'color-lab':    { zip: 'https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/Color-Lab-1.0.0.zip', community: '' },
+    'psd':          { zip: 'https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/PSD-to-Figma-0.4.0-beta.zip', community: '' },
+    'printprep':    { zip: 'https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/PrintPrep-0.5.1-beta.zip', community: '' }
+  };
+  var SIZE = { 'er-layouts':'17 КБ', 'color-lab':'25 КБ', 'psd':'130 КБ', 'printprep':'35 МБ' };
+
+  var root = document;
+  var dl = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
+  var fg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 3h4v6H8a3 3 0 0 1 0-6Zm4 0h4a3 3 0 0 1 0 6h-4V3Zm-4 6h4v6H8a3 3 0 0 1 0-6Zm8 0a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm-8 6h4v3a3 3 0 1 1-4-3Z"/></svg>';
+  root.querySelectorAll('.erp [data-link]').forEach(function(a){
+    var p = a.getAttribute('data-link').split('.'), id = p[0], kind = p[1];
+    var url = (LINKS[id] || {})[kind] || '';
+    if(kind === 'zip'){
+      a.innerHTML = dl + (url ? 'Скачать ZIP · ' + SIZE[id] : 'Скачать · скоро');
+    } else {
+      a.innerHTML = fg + (url ? 'Figma Community' : 'Community · скоро');
+    }
+    if(url){ a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+    else { a.classList.add('off'); a.removeAttribute('href'); }
+  });
+  root.querySelectorAll('.erp [data-go]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var t = document.getElementById(a.getAttribute('href').slice(1));
+      if(t){ e.preventDefault(); window.scrollTo({top: t.getBoundingClientRect().top + window.pageYOffset - 20, behavior:'smooth'}); }
+    });
+  });
+})();
+</script>
