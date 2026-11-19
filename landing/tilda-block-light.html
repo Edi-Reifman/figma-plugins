@@ -1,0 +1,345 @@
+<!-- ER-Design · Плагины для Figma · блок для Tilda (T123 «HTML-код») -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+.erp{--bg:#0d0d0f;--bg2:#141417;--card:#18181c;--line:rgba(255,255,255,.09);--tx:#f2f2f0;--mut:#9a9aa2;--acc:#c8f560;
+  background:var(--bg);color:var(--tx);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden}
+.erp *{box-sizing:border-box;margin:0;padding:0}
+.erp a{color:inherit;text-decoration:none}
+.erp img{display:block;max-width:100%}
+.erp .w{max-width:1200px;margin:0 auto;padding:0 28px}
+.erp .mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.erp h1,.erp h2,.erp h3{font-weight:800;letter-spacing:-.025em;line-height:1.05}
+
+/* top bar */
+.erp .top{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+.erp .logo{font-weight:800;font-size:18px;letter-spacing:-.01em}
+.erp .logo span{color:var(--acc)}
+.erp .top nav{display:flex;gap:26px;font-size:15px;color:var(--mut)}
+.erp .top nav a:hover{color:var(--tx)}
+
+/* hero */
+.erp .hero{padding:72px 0 64px;position:relative}
+.erp .hero:before{content:"";position:absolute;inset:-200px -300px auto auto;width:720px;height:720px;
+  background:radial-gradient(closest-side,rgba(200,245,96,.13),transparent);pointer-events:none}
+.erp .hero h1{font-size:clamp(40px,6.6vw,86px);max-width:1050px}
+.erp .hero h1 em{font-style:normal;color:var(--acc)}
+.erp .hero p.lead{font-size:clamp(18px,2vw,22px);color:#c9c9cf;max-width:640px;margin-top:26px}
+.erp .facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.erp .fact{border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14px;color:#d6d6db;display:flex;align-items:center;gap:8px}
+.erp .fact i{width:7px;height:7px;border-radius:50%;background:var(--acc);display:inline-block}
+.erp .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.erp .btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:14px;font-weight:700;font-size:16px;
+  border:1px solid var(--line);transition:transform .15s,background .15s,opacity .15s;cursor:pointer;white-space:nowrap}
+.erp .btn:hover{transform:translateY(-1px)}
+.erp .btn.pri{background:var(--acc);color:#111;border-color:transparent}
+.erp .btn.sec{background:rgba(255,255,255,.04)}
+.erp .btn.sec:hover{background:rgba(255,255,255,.08)}
+.erp .btn.off{opacity:.45;pointer-events:none}
+.erp .btn svg{width:18px;height:18px;flex:none}
+
+/* index */
+.erp .idx{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:64px}
+.erp .idx a{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .2s}
+.erp .idx a:hover{border-color:var(--c);transform:translateY(-2px)}
+.erp .idx img,.erp .idx .ic{width:44px;height:44px;border-radius:11px}
+.erp .idx b{font-size:16px;display:block}
+.erp .idx small{font-size:13px;color:var(--mut);line-height:1.35;display:block;margin-top:4px}
+
+/* plugin sections */
+.erp .pl{padding:96px 0;border-top:1px solid var(--line)}
+.erp .pl-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+.erp .pl.rev .pl-media{order:-1}
+.erp .pl-head{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.erp .pl-head img,.erp .pl-head .ic{width:60px;height:60px;border-radius:15px;flex:none}
+.erp .badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.erp .bd{font-size:12px;font-weight:600;padding:3px 9px;border-radius:7px;background:rgba(255,255,255,.06);color:#cfcfd5}
+.erp .bd.c{background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}
+.erp .pl h2{font-size:clamp(34px,4.4vw,54px)}
+.erp .pl .tag{font-size:20px;color:#d9d9de;margin-top:14px;max-width:520px}
+.erp .pl ul{list-style:none;margin-top:26px;display:grid;gap:12px}
+.erp .pl li{position:relative;padding-left:26px;color:#c4c4cb;font-size:16px}
+.erp .pl li:before{content:"";position:absolute;left:0;top:9px;width:12px;height:2px;background:var(--c)}
+.erp .pl li b{color:var(--tx);font-weight:700}
+.erp .note{margin-top:22px;font-size:14px;color:var(--mut);border-left:2px solid var(--line);padding-left:14px}
+.erp .pl .ctas{margin-top:30px}
+.erp .pl .btn.pri{background:var(--c)}
+.erp .pl-media{border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);aspect-ratio:16/9;box-shadow:0 40px 80px -40px color-mix(in srgb,var(--c) 45%,transparent)}
+.erp .pl-media img,.erp .pl-media svg{width:100%;height:100%;object-fit:cover}
+
+/* install */
+.erp .inst{padding:110px 0;background:var(--bg2);border-top:1px solid var(--line)}
+.erp .sec-h{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:48px}
+.erp .sec-h h2{font-size:clamp(36px,5vw,64px);max-width:700px}
+.erp .sec-h p{color:var(--mut);max-width:380px}
+.erp .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:s}
+.erp .step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px 28px;counter-increment:s}
+.erp .step:before{content:"0" counter(s);font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--acc);display:block;margin-bottom:34px}
+.erp .step h3{font-size:21px;letter-spacing:-.01em;margin-bottom:10px}
+.erp .step p{font-size:15px;color:#b5b5bc}
+.erp .path{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12.5px;background:rgba(200,245,96,.1);color:var(--acc);padding:6px 9px;border-radius:8px;margin-top:12px;line-height:1.5}
+.erp .tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.erp .tip{border:1px dashed rgba(255,255,255,.14);border-radius:18px;padding:20px 22px;font-size:15px;color:#b5b5bc}
+.erp .tip b{color:var(--tx);display:block;margin-bottom:6px;font-size:16px}
+
+/* faq */
+.erp .faq{padding:110px 0;border-top:1px solid var(--line)}
+.erp .faq-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:56px}
+.erp .faq h2{font-size:clamp(36px,5vw,64px)}
+.erp details{border-bottom:1px solid var(--line);padding:22px 0}
+.erp details:first-child{border-top:1px solid var(--line)}
+.erp summary{cursor:pointer;list-style:none;font-weight:700;font-size:19px;display:flex;justify-content:space-between;gap:20px}
+.erp summary::-webkit-details-marker{display:none}
+.erp summary:after{content:"+";color:var(--acc);font-weight:500;font-size:24px;line-height:1;transition:transform .2s}
+.erp details[open] summary:after{transform:rotate(45deg)}
+.erp details p{color:#b5b5bc;margin-top:12px;font-size:16px;max-width:680px}
+
+/* footer */
+.erp .foot{padding:90px 0 50px;border-top:1px solid var(--line)}
+.erp .foot-cta{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
+.erp .foot h2{font-size:clamp(34px,4.6vw,58px);max-width:640px}
+.erp .foot h2 a{color:var(--acc);border-bottom:2px solid currentColor}
+.erp .foot-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:70px;font-size:14px;color:var(--mut)}
+.erp .foot-bot a:hover{color:var(--tx)}
+
+@media (max-width:1024px){
+  .erp .idx{grid-template-columns:repeat(2,1fr)}
+  .erp .pl-grid{grid-template-columns:1fr;gap:36px}
+  .erp .pl.rev .pl-media{order:0}
+  .erp .pl-media{order:-1}
+  .erp .steps{grid-template-columns:repeat(2,1fr)}
+  .erp .faq-grid{grid-template-columns:1fr;gap:30px}
+}
+@media (max-width:640px){
+  .erp{font-size:16px}
+  .erp .w{padding:0 18px}
+  .erp .top nav{display:none}
+  .erp .hero{padding:40px 0 48px}
+  .erp .idx{grid-template-columns:1fr 1fr;margin-top:44px}
+  .erp .pl,.erp .inst,.erp .faq{padding:70px 0}
+  .erp .steps,.erp .tips{grid-template-columns:1fr}
+  .erp .btn{width:100%;justify-content:center}
+  .erp .step:before{margin-bottom:18px}
+}
+</style>
+
+<div class="erp" id="erp">
+  <div class="w">
+    <header class="top">
+      <a class="logo" href="https://er-design.space">ER<span>·</span>Design</a>
+      <nav>
+        <a href="#erp-plugins" data-go>Плагины</a>
+        <a href="#erp-install" data-go>Установка</a>
+        <a href="#erp-faq" data-go>Вопросы</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="mono">Бесплатные плагины для Figma</div>
+      <h1 style="margin-top:18px">Четыре плагина, которые <em>забирают рутину</em> у дизайнера</h1>
+      <p class="lead">Сделал под свои задачи: карточки маркетплейсов, баннеры, афиши и полиграфия. Теперь делюсь ими. Разметка зон, цветокоррекция, импорт PSD и печатный CMYK — всё прямо в Figma.</p>
+      <div class="facts">
+        <span class="fact"><i></i>Бесплатно, без регистрации</span>
+        <span class="fact"><i></i>Работают локально, без интернета</span>
+        <span class="fact"><i></i>Установка за минуту</span>
+      </div>
+      <div class="ctas">
+        <a class="btn pri" href="#erp-plugins" data-go>Выбрать плагин</a>
+        <a class="btn sec" href="#erp-install" data-go>Как установить</a>
+      </div>
+
+      <div class="idx" id="erp-plugins">
+        <a href="#erp-er-layouts" data-go style="--c:#ff8a3d"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/b0c84b0241.webp" alt=""><span><b>ER Layouts</b><small>Вылеты, безопасные и слепые зоны</small></span></a>
+        <a href="#erp-color-lab" data-go style="--c:#c8f560"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/0a860767c9.webp" alt=""><span><b>Color Lab</b><small>9 цветокоррекций как в Photoshop</small></span></a>
+        <a href="#erp-psd" data-go style="--c:#9b8cff"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/d3324f2b55.webp" alt=""><span><b>PSD → Figma</b><small>Импорт PSD со слоями и текстом</small></span></a>
+        <a href="#erp-printprep" data-go style="--c:#a6e36a"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/a30e1be109.webp" alt=""><span><b>PrintPrep</b><small>Печать: мм, вылеты, CMYK PDF</small></span></a>
+      </div>
+    </section>
+  </div>
+
+  <!-- 1. ER LAYOUTS -->
+  <section class="pl" id="erp-er-layouts" style="--c:#ff8a3d">
+    <div class="w pl-grid">
+      <div>
+        <div class="pl-head"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/b0c84b0241.webp" alt="">
+          <div><div class="mono">01 · Разметка</div><div class="badges"><span class="bd c">v1.0</span><span class="bd">Интерфейс RU</span></div></div></div>
+        <h2>ER Layouts</h2>
+        <p class="tag">Артборды сразу с вылетами, безопасным полем и слепыми зонами: для маркетплейсов, рекламы и печати.</p>
+        <ul>
+          <li><b>Маркетплейсы.</b> Карточки Wildberries, Ozon, Яндекс Маркета, AliExpress. Красным отмечено, где площадка положит сердечко, скидку и корзину, чтобы текст не уехал под них.</li>
+          <li><b>Реклама и соцсети.</b> 1:1, 4:5, Stories, Reels, VK Клипы, TikTok, YouTube, медийные баннеры.</li>
+          <li><b>Печать в миллиметрах.</b> A6–A1, визитка, евро-флаер, ролл-ап, пресс-волл. Вылет и рез ставятся сами.</li>
+          <li><b>Размеры из ТЗ списком.</b> Вставьте «Афиша 297x420 мм +3, 300x250, 728x90», и плагин создаст все артборды.</li>
+          <li><b>Пакеты и свои пресеты.</b> Набор форматов в один клик, экспорт и импорт в JSON для команды.</li>
+        </ul>
+        <div class="ctas">
+          <a class="btn pri" data-link="er-layouts.zip"></a>
+          <a class="btn sec" data-link="er-layouts.community"></a>
+        </div>
+      </div>
+      <div class="pl-media"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/2ec6489f4e.webp" alt="ER Layouts: артборды Wildberries и Stories со слепыми зонами" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- 3. COLOR LAB -->
+  <section class="pl rev" id="erp-color-lab" style="--c:#c8f560">
+    <div class="w pl-grid">
+      <div>
+        <div class="pl-head"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/0a860767c9.webp" alt="">
+          <div><div class="mono">02 · Цвет</div><div class="badges"><span class="bd c">v1.0</span><span class="bd">Интерфейс RU / EN</span></div></div></div>
+        <h2>Color Lab</h2>
+        <p class="tag">Девять цветокоррекций прямо в Figma: для фото, вектора, текста и целых фреймов.</p>
+        <ul>
+          <li><b>Привычные инструменты.</b> Brightness/Contrast, Levels, Curves, Exposure, Vibrance, Hue/Saturation, Color Balance, Black &amp; White, Photo Filter.</li>
+          <li><b>Два режима.</b> «Редактируемые слои» оставляют текст и вектор живыми. «Единое изображение» применяет общую коррекцию ко всей композиции.</li>
+          <li><b>До и после.</b> Удерживайте кнопку, чтобы сравнить. Результат создаётся копией, оригинал не меняется.</li>
+          <li><b>Пресеты JSON.</b> Сохраните удачную настройку и примените её к серии макетов.</li>
+        </ul>
+        <p class="note">Алгоритмы свои, поэтому результат может немного отличаться от Photoshop. Обработка в 8-битном sRGB.</p>
+        <div class="ctas">
+          <a class="btn pri" data-link="color-lab.zip"></a>
+          <a class="btn sec" data-link="color-lab.community"></a>
+        </div>
+      </div>
+      <div class="pl-media"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/c75bfa5e9f.webp" alt="Color Lab: панель цветокоррекции в Figma" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- 4. PSD -> FIGMA -->
+  <section class="pl" id="erp-psd" style="--c:#9b8cff">
+    <div class="w pl-grid">
+      <div>
+        <div class="pl-head"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/d3324f2b55.webp" alt="">
+          <div><div class="mono">03 · Импорт</div><div class="badges"><span class="bd c">v0.4 beta</span><span class="bd">Интерфейс EN</span></div></div></div>
+        <h2>PSD → Figma</h2>
+        <p class="tag">Открывайте макеты из Photoshop в Figma со слоями, группами и редактируемым текстом. Есть и обратный экспорт в PSD.</p>
+        <ul>
+          <li><b>Структура на месте.</b> Сохраняет группы, порядок слоёв, положение, видимость и прозрачность.</li>
+          <li><b>Живой текст и вектор.</b> Текст со смешанными стилями и векторные фигуры остаются редактируемыми. Растровые маски тоже переносятся.</li>
+          <li><b>Честный отчёт.</b> Показывает, какие шрифты заменены и что не поддерживается. Можно включить скрытый оригинал для сравнения.</li>
+          <li><b>Figma → PSD.</b> Экспортирует фрейм в PSD с группами и текстом. Сложные эффекты сохраняются растром.</li>
+        </ul>
+        <p class="note">Поддерживаются PSD в RGB или Grayscale, 8 бит; PSB не поддерживается. Смарт-объекты приходят картинкой. Для точного совпадения нужны те же шрифты в Figma.</p>
+        <div class="ctas">
+          <a class="btn pri" data-link="psd.zip"></a>
+          <a class="btn sec" data-link="psd.community"></a>
+        </div>
+      </div>
+      <div class="pl-media"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/c74af8de18.webp" alt="PSD → Figma: импорт слоёв" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- 5. PRINTPREP -->
+  <section class="pl rev" id="erp-printprep" style="--c:#a6e36a">
+    <div class="w pl-grid">
+      <div>
+        <div class="pl-head"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/a30e1be109.webp" alt="">
+          <div><div class="mono">04 · Печать</div><div class="badges"><span class="bd c">v0.5 beta</span><span class="bd">Интерфейс EN</span></div></div></div>
+        <h2>PrintPrep</h2>
+        <p class="tag">Готовит макет к печати прямо в Figma: миллиметры, вылеты и экспорт в CMYK по профилю типографии.</p>
+        <ul>
+          <li><b>Макет в миллиметрах.</b> Визитка, A6–A3 или свой формат. Вылеты на каждую сторону и безопасный отступ от реза.</li>
+          <li><b>Проверка перед сдачей.</b> Находит картинки с низким разрешением, отсутствующие шрифты и текст за безопасной зоной.</li>
+          <li><b>CMYK PDF, EPS, TIFF.</b> Конвертирует через ICC-профиль вашей типографии. В PDF добавляются TrimBox, BleedBox и метки реза.</li>
+          <li><b>DPI под задачу.</b> 72, 150, 300, 600, 1200 или своё значение от 36 до 1200.</li>
+        </ul>
+        <p class="note">Это не полная допечатная проверка: PDF/X, плашечные цвета и спуск полос не поддерживаются. Требования к файлу уточняйте в типографии. Архив весит около 35 МБ, внутри движок Ghostscript для EPS.</p>
+        <div class="ctas">
+          <a class="btn pri" data-link="printprep.zip"></a>
+          <a class="btn sec" data-link="printprep.community"></a>
+        </div>
+      </div>
+      <div class="pl-media"><img src="https://cdn.jsdelivr.net/gh/Edi-Reifman/figma-plugins@tilda-landing/landing/img/08bf4e5eac.webp" alt="PrintPrep: макет визитки 90×50 мм" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- INSTALL -->
+  <section class="inst" id="erp-install">
+    <div class="w">
+      <div class="sec-h">
+        <div><div class="mono">Установка</div><h2 style="margin-top:14px">Установить за минуту</h2></div>
+        <p>Порядок одинаковый для всех четырёх плагинов. Нужно только настольное приложение Figma для Mac или Windows.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Скачайте архив</h3><p>Нажмите «Скачать» у нужного плагина и распакуйте ZIP.</p></div>
+        <div class="step"><h3>Положите папку на место</h3><p>Выберите постоянное место, например «Документы/Figma plugins». Figma запускает плагин прямо из этой папки.</p></div>
+        <div class="step"><h3>Импортируйте в Figma</h3><p>Откройте любой файл в приложении Figma и пройдите по меню:</p><span class="path">Plugins → Development →<br>Import plugin from manifest…</span></div>
+        <div class="step"><h3>Выберите manifest.json</h3><p>Файл лежит в распакованной папке. После этого плагин появится в меню:</p><span class="path">Plugins → Development</span></div>
+      </div>
+      <div class="tips">
+        <div class="tip"><b>Не работает в браузере</b>Импорт из manifest есть только в приложении Figma. Скачать его можно на figma.com/downloads.</div>
+        <div class="tip"><b>Не перемещайте папку</b>Если удалить или переместить папку, плагин пропадёт из меню. Тогда просто импортируйте его заново.</div>
+        <div class="tip"><b>Обновление</b>Закройте плагин и замените файлы в той же папке новыми. Наборы и пресеты сохранятся.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="erp-faq">
+    <div class="w faq-grid">
+      <div><div class="mono">Вопросы</div><h2 style="margin-top:14px">Частые вопросы</h2></div>
+      <div>
+        <details><summary>Это правда бесплатно?</summary><p>Да. Все функции открыты, регистрации и подписок нет. Если плагины экономят вам время, разработку можно поддержать добровольно. Это ничего не открывает дополнительно.</p></details>
+        <details><summary>Мои макеты куда-то отправляются?</summary><p>Нет. У всех четырёх плагинов в настройках запрещён доступ к сети. Обработка идёт на вашем компьютере, без аналитики и сторонних сервисов.</p></details>
+        <details><summary>Почему плагин в разделе Development, а не в обычном списке?</summary><p>Пока плагины распространяются архивом и подключаются как локальные. Они работают так же, как плагины из Community. Когда их опубликуют в Figma Community, установить можно будет в один клик.</p></details>
+        <details><summary>Будет работать в браузерной Figma?</summary><p>Подключить плагин из архива можно только в настольном приложении. После подключения он работает во всех ваших файлах в этом приложении.</p></details>
+        <details><summary>Нашёл ошибку или есть идея</summary><p>Напишите на <a href="mailto:info@er-design.space" style="color:var(--acc)">info@er-design.space</a>. Укажите плагин, версию Figma и, если можно, приложите скриншот. Конфиденциальные файлы без договорённости не присылайте.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="w">
+      <div class="foot-cta">
+        <h2>Нужен дизайн, а не плагин? <a href="https://er-design.space">Смотрите портфолио</a></h2>
+        <div class="ctas" style="margin-top:0">
+          <a class="btn sec" href="https://paypal.me/edireifman" target="_blank" rel="noopener">Поддержать разработку</a>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <span>© ER-Design · Эдуард Рейфман</span>
+        <a href="mailto:info@er-design.space">info@er-design.space</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  /* ====== ССЫЛКИ: вставьте адреса между кавычками ======
+     zip       — прямая ссылка на архив (Яндекс Диск, Google Drive, свой сервер)
+     community — страница плагина в Figma Community (после публикации)
+     Пустая строка = кнопка показывается неактивной с подписью «скоро». */
+  var LINKS = {
+    'er-layouts':   { zip: 'https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/ER-Layouts-1.0.zip', community: '' },
+    'color-lab':    { zip: 'https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/Color-Lab-1.0.0.zip', community: '' },
+    'psd':          { zip: 'https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/PSD-to-Figma-0.4.0-beta.zip', community: '' },
+    'printprep':    { zip: 'https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/PrintPrep-0.5.1-beta.zip', community: '' }
+  };
+  var SIZE = { 'er-layouts':'17 КБ', 'color-lab':'25 КБ', 'psd':'130 КБ', 'printprep':'35 МБ' };
+
+  var root = document.getElementById('erp'); if(!root) return;
+  var dl = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
+  var fg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 3h4v6H8a3 3 0 0 1 0-6Zm4 0h4a3 3 0 0 1 0 6h-4V3Zm-4 6h4v6H8a3 3 0 0 1 0-6Zm8 0a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm-8 6h4v3a3 3 0 1 1-4-3Z"/></svg>';
+  root.querySelectorAll('[data-link]').forEach(function(a){
+    var p = a.getAttribute('data-link').split('.'), id = p[0], kind = p[1];
+    var url = (LINKS[id] || {})[kind] || '';
+    if(kind === 'zip'){
+      a.innerHTML = dl + (url ? 'Скачать ZIP · ' + SIZE[id] : 'Скачать · скоро');
+    } else {
+      a.innerHTML = fg + (url ? 'Figma Community' : 'Community · скоро');
+    }
+    if(url){ a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+    else { a.classList.add('off'); a.removeAttribute('href'); }
+  });
+  root.querySelectorAll('[data-go]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var t = document.getElementById(a.getAttribute('href').slice(1));
+      if(t){ e.preventDefault(); window.scrollTo({top: t.getBoundingClientRect().top + window.pageYOffset - 20, behavior:'smooth'}); }
+    });
+  });
+})();
+</script>
