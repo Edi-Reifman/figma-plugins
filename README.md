@@ -4,13 +4,13 @@
 
 | Плагин | Что делает | Версия | Скачать |
 |---|---|---|---|
-| **ER Layouts** | Создаёт артборды с вылетами, безопасными и слепыми зонами для маркетплейсов, рекламы и печати | 1.0 | [ZIP](https://github.com/Edi-Reifman/figma-plugins/releases/download/er-layouts-v1.0/ER-Layouts-1.0.zip) |
-| **Smart Resize** | Делает ресайзы баннера по списку размеров и подбирает композицию | 2.0.0 | [ZIP](https://github.com/Edi-Reifman/figma-plugins/releases/download/smart-resize-v2.0.0/Smart-Resize-2.0.0.zip) |
-| **Color Lab** | Девять цветокоррекций: Levels, Curves, Hue/Saturation и другие | 1.0.0 | [ZIP](https://github.com/Edi-Reifman/figma-plugins/releases/download/color-lab-v1.0.0/Color-Lab-1.0.0.zip) |
-| **PSD → Figma** | Импортирует PSD со слоями, текстом и векторами, экспортирует Figma → PSD | 0.4.0 beta | [ZIP](https://github.com/Edi-Reifman/figma-plugins/releases/download/psd-to-figma-v0.4.0/PSD-to-Figma-0.4.0-beta.zip) |
-| **PrintPrep** | Делает макеты в миллиметрах, экспортирует CMYK PDF, EPS и TIFF через ICC | 0.5.1 beta | [ZIP](https://github.com/Edi-Reifman/figma-plugins/releases/download/printprep-v0.5.1/PrintPrep-0.5.1-beta.zip) |
+| **ER Layouts** | Создаёт артборды с вылетами, безопасными и слепыми зонами для маркетплейсов, рекламы и печати | 1.0 | [ZIP](https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/ER-Layouts-1.0.zip) |
+| **Smart Resize** | Делает ресайзы баннера по списку размеров и подбирает композицию | 2.0.0 | [ZIP](https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/Smart-Resize-2.0.0.zip) |
+| **Color Lab** | Девять цветокоррекций: Levels, Curves, Hue/Saturation и другие | 1.0.0 | [ZIP](https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/Color-Lab-1.0.0.zip) |
+| **PSD → Figma** | Импортирует PSD со слоями, текстом и векторами, экспортирует Figma → PSD | 0.4.0 beta | [ZIP](https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/PSD-to-Figma-0.4.0-beta.zip) |
+| **PrintPrep** | Делает макеты в миллиметрах, экспортирует CMYK PDF, EPS и TIFF через ICC | 0.5.1 beta | [ZIP](https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/PrintPrep-0.5.1-beta.zip) |
 
-Все версии лежат на странице [Releases](https://github.com/Edi-Reifman/figma-plugins/releases), а подробные описания — на лендинге [er-design.space](https://er-design.space).
+Все архивы лежат в папке [`downloads/`](downloads), а подробные описания — на лендинге [er-design.space](https://er-design.space).
 
 ## Установка
 
@@ -24,11 +24,11 @@
 
 ## Папка `plugins/`
 
-Здесь лежат те же файлы, что и в архивах: их можно посмотреть прямо на GitHub. Для установки удобнее брать ZIP из Releases.
+Здесь лежат те же файлы, что и в архивах: их можно посмотреть прямо на GitHub. Для установки удобнее брать ZIP из `downloads/`.
 
 ## Лицензии
 
-- **PrintPrep** распространяется по GNU AGPLv3 и включает Ghostscript (AGPL) и pdf-lib (MIT). Архив исходников приложен к [релизу PrintPrep](https://github.com/Edi-Reifman/figma-plugins/releases/tag/printprep-v0.5.1).
+- **PrintPrep** распространяется по GNU AGPLv3 и включает Ghostscript (AGPL) и pdf-lib (MIT). Исходники: [PrintPrep-source-0.5.1-rc.1.zip](https://github.com/Edi-Reifman/figma-plugins/raw/main/downloads/PrintPrep-source-0.5.1-rc.1.zip).
 - **PSD → Figma**: уведомления о сторонних библиотеках находятся в `THIRD_PARTY_NOTICES.txt`.
 - **Smart Resize**: MIT, см. `LICENSE`.
 - **Color Lab**, **ER Layouts**: бесплатны для использования, все права на код принадлежат автору (см. `NOTICE.txt`).
